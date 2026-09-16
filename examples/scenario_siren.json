@@ -1,0 +1,15 @@
+{
+  "description": "JOICommands-280 행 (category 1, index 4). connected_devices 가 없어 서비스 문맥은 전체 스키마(또는 BM25 shortlist)로 구성된다.",
+  "dataset_row_no": 4,
+  "category": "1",
+  "index": "4",
+  "command_kor": "사이렌을 응급모드로 울려줘.",
+  "command_eng": "Set the siren to emergency mode.",
+  "connected_devices": "",
+  "reference": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Siren).siren_setsirenmode(\\\"emergency\\\")\"}",
+  "saved_output": "saved_output_siren.json",
+  "source": {
+    "dataset": "datasets/JOICommands-280.csv",
+    "note": "reference 는 DET 평가에만 쓰이며 생성 입력에 들어가지 않는다. 이 행의 기준 코드는 초기 블록 02 의 정적 예제에도 그대로 들어 있다(docs/dataset.md 참조)."
+  }
+}

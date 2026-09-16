@@ -1,0 +1,227 @@
+# id: 05
+# role: repair
+# params: temperature, few_shot_count, max_tokens, micro_rules
+# description: Targeted repair prompt that fixes schema mismatch, arg typing, and semantic drift with minimal edits.
+# placeholders: {command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {best_candidate}, {det_diagnostics}, {failure_summary}
+
+Task:
+Repair one JOI JSON candidate using deterministic diagnostics.
+
+Inputs:
+- command_eng: {command_eng}
+- connected_devices: {connected_devices}
+- optional_cron: {optional_cron}
+- optional_period: {optional_period}
+- current best_candidate:
+{best_candidate}
+- diagnostics:
+{det_diagnostics}
+- summarized failures:
+{failure_summary}
+- authoritative service schema snippet:
+{service_list_snippet}
+
+Repair rules:
+1. Preserve the original intent and keep edits minimal.
+2. Return exactly one JSON object only.
+3. Keep only keys name, cron, period, code.
+4. For unscheduled commands, normalize cron to "" and period to 0.
+4a. Treat `service_list_snippet` as the only authoritative capability scope. If the snippet is retrieval-scoped, do not invent categories outside the listed `device_groups`.
+5. In the snippet, `service` is already the canonical prefixed member name such as `Speaker_SetVolume` or `LevelControl_MoveToLevel`, and `raw_service` is only descriptive. If a function or value name is wrong, repair to that exact canonical member and emit its lowercase form in final code.
+6. If an argument type or numeric comparison is wrong, coerce it to the correct literal type, descriptor-defined unit, and argument format. If a value service reports millivolts, convert user volts to millivolts, e.g. 220V -> 220000.
+6a. Repair source-selection drift narrowly: external/outdoor/weather air-quality phrases such as "outdoor dust", "outside fine dust", "외부 미세먼지", or "바깥 미세먼지" must use `WeatherProvider` values, not `AirQualitySensor`. Use `weatherprovider_pm10weather` for dust/fine-dust/미세먼지/PM10, and `weatherprovider_pm25weather` only when PM2.5/ultrafine/초미세먼지 is explicit.
+6b. In a rain sequence that checks again after a delay and then acts if it is not raining, repair the delayed recheck to `weatherprovider_weather != "rain"` while keeping the initial rain trigger as `rainsensor_rain == true`.
+6c. Repair general temperature to `temperaturesensor_temperature`, general humidity to `humiditysensor_humidity`, illuminance / lux / 조도 to `lightsensor_brightness`, and general carbon dioxide / CO2 / 이산화탄소 to `airqualitysensor_carbondioxide` when those services are available.
+6d. Repair cloud service availability / activation checks to `cloudserviceprovider_isavailable == true`; remove bogus arguments such as `cloudserviceprovider_isavailable(true)`, and do not use `cloudserviceprovider_chatsession` because it represents an AI chat session, not availability.
+6d. Repair PresenceSensor comparisons to BOOL: `presencesensor_presence == true` for detected/present and `presencesensor_presence == false` for no one/no person.
+7. If a condition uses a function where a value is required, rewrite the condition to use the correct value.
+8. Remove unrelated actions.
+9. Insert a power-check only when the snippet explicitly supports it for the same target context.
+10. If the candidate is irreparable from the snippet, return valid JSON with code as an empty string.
+11. If the command says to do something after a duration, reinsert delay(...) and keep the action order aligned with the command.
+11a. Repair `(#Clock).clock_delay(milliseconds)` into the JOILang helper form `delay(N SEC|MIN|HOUR)` when it is used as a between-action wait.
+11b. Repair "check/read/measure now and again after N minutes; if it changed by T or more" candidates to the snapshot pattern: original read, `delay(N MIN)`, second read from the same receiver tags, then `new >= original + T or new <= original - T`. Remove `wait until true`, `period`, or `prev/curr` edge-trigger rewrites for this one-shot recheck pattern.
+12. If the command describes threshold crossings or repeated alternation, restore the missing condition/state structure instead of collapsing it into a single immediate action.
+13. If grouped tags express the intent better than explicit instance IDs, rewrite to tag-based all(...) or tag-based receivers.
+13a. Match spaced or lowercase phrases in the command to CamelCase connected tags when their normalized text is the same. For example, repair `(#TemperatureSensor)` to `(#WineCellar #TemperatureSensor)` when the command says wine cellar/와인 셀러 and connected tags include `#WineCellar`.
+14. If diagnostics include a schema-valid gt_script, prefer its receiver style, schedule representation, and temporal structure over alias-like device ids or alternate syntax.
+15. If diagnostics include gt_script string literals for speaker or email actions, preserve those literals exactly.
+15a. For Korean speaker announcements that say a temperature changed rapidly (`온도가 급변`), repair toward the concise statement `"<target>의 온도가 급변했습니다"` without extra punctuation. If the target is wine cellar, use `"와인셀러의 온도가 급변했습니다"`.
+15b. Repair invented `mediaplayback_speak(...)` to `speaker_speak(...)` for speaker/report/notify/output commands.
+15c. If command_kor contains an explicit quoted Korean message, preserve that exact Korean message in `speaker_speak(...)`; do not translate it to English.
+16. If the command is a wall-clock schedule with a simple group action and the candidate code is empty, recover it using the direct tag-based action.
+17. If the command is a repeated event trigger, restore period 100 plus prev/curr or triggered-state logic instead of a one-shot action.
+18. If the command asks for maximum brightness and the schema supports LevelControl plus Switch, repair toward LevelControl_MoveToLevel(100, 0) followed by Switch_Off() after any requested delay.
+19. If the command uses repeated wording like "whenever", "each time", or "every time", repair toward edge-trigger semantics, not a one-shot wait until.
+20. If the command uses a time window like "every 10 minutes from now until 3 PM" or "from 10 PM to 11 PM", preserve both the repeat interval and the end condition with period plus Clock guards or cron plus period when a wall-clock anchor exists.
+21. If the candidate collapses multiple semantic tags into alias-like ids, rewrite the receiver using all(...) or explicit tag-based JOILang receivers that preserve the original tags.
+22. If the candidate calls an action on the wrong device family, move the side effect to the proper actuator and keep the sensor only in the condition or expression.
+23. If the schema exposes an exact action like Camera_CaptureImage, DoorLock_Lock, Switch_Off, or Light_MoveToRGB, replace invented synonyms with that canonical action.
+23a. For `#Light` color actions, repair `colorcontrol_setcolor("r,g,b")` to `light_movetorgb(r, g, b)` when `Light_MoveToRGB` is available.
+24. If button-specific values exist, repair to the exact button-specific value service rather than generic pushed_2x style encodings.
+24a. Repair invented `multibutton_button2 == "pressed"` to `dimmerswitch_button2 == "pushed"` when the snippet exposes `DimmerSwitch_Button2`.
+25. If the candidate used a generic value service but the command provides all slots for a parameterized function, repair toward the function. For MenuProvider, replace `menuprovider_todaymenu` with `menuprovider_getmenu("<date> <place> <meal>")` only when date/day, place, and meal-time are all explicitly present. If one of those slots is missing, do not invent it; keep the generic value fallback.
+26. If `Oven_SetCookingParameters` or `RiceCooker_SetCookingParameters` has a minutes value in the command, repair the second argument to seconds, e.g. 30 minutes -> 1800. Also replace any top-level `|` argument separator in function calls with comma.
+27. If the command is plain power control and the target exposes switch behavior, repair mode setters or state comparisons back to `switch_on()` or `switch_off()`. Use mode setters only when the command explicitly asks for a named mode.
+27a. For connected-device groups, repair plain power control to the semantic target receiver with the shared switch capability. Example: `(#Study #AirPurifier).airpurifier_setairpurifiermode("auto")` for "turn on the study air purifier" must become `(#Study #AirPurifier).switch_on()` when Switch_On is available in the same group.
+27b. For state preconditions such as "the AC/air conditioner is off" / "에어컨이 꺼져 있으면", repair mode-value checks such as `airconditioner_airconditionermode == "auto"` to the shared switch state: `switch_switch == false`.
+27c. If a candidate expands "if off then on, if on then off" into two branches and the target exposes `switch_toggle()`, repair it to the single toggle action.
+28. If the command says any/all/every sensor in a location, repair single sensor receivers to `all(#Location #SensorCategory)` and preserve the same location tag on the target action receiver.
+29. For WindowCovering/Blind/Shade actions, repair inverted direction: "raise/up/open/올려/열어" must use `windowcovering_uporopen()`, while "lower/down/close/내려/닫아" must use `windowcovering_downorclose()`.
+29a. If the command says blind/shade/window but the candidate used bare `(#WindowCovering)`, repair the receiver to the semantic tag from the command, e.g. `#Blind`, `#Shade`, or `#Window`, while keeping the valid `windowcovering_*` member.
+30. Repair invalid siren mode-off calls such as `siren_setsirenmode("off")` to `switch_off()` when a siren must stop after a duration.
+30a. Repair empty siren mode calls such as `siren_setsirenmode("")` to `switch_off()`.
+31. Repair dehumidifier "internal care" / "내부케어" to `dehumidifier_setdehumidifiermode("auto")` unless the snippet has an explicit internal-care enum.
+32. Repair weather reports through speaker to `weatherprovider_weather` unless explicit latitude/longitude arguments justify `weatherprovider_getweatherinfo(...)`.
+33. Repair current-time reports through speaker to use `clock_hour` and `clock_minute` in the spoken text, not only `clock_time`.
+34. Repair schedule fields so wall-clock start/day filters go in `cron`, explicit repeated intervals go in `period`, and code only keeps the necessary stop boundary such as `clock_hour == 0` for midnight.
+34a. Repair "until 3 PM" / "오후 3시까지" guards to `clock_hour == 15`, not `>= 15`.
+35. If a condition has a location but the action says global "all lights", remove the condition location from the action receiver unless the command explicitly scopes the action to that location.
+36. Repair floor aliases to canonical tags: `#FirstFloor`/`#1stFloor` -> `#Floor1`, `#SecondFloor` -> `#Floor2`, `#ThirdFloor` -> `#Floor3`, and remove duplicate aliases.
+37. Repair `#Window.door_doorstate == "open"` to the supported window position state, e.g. `#Window.armrobot_currentposition >| 0`, when the snippet uses position for open/closed.
+38. Repair later wall-clock actions inside one scenario to `delay(...)`; for example, an 8 AM action followed by a 9 AM action should use `delay(1 HOUR)`, not `wait until clock_hour == 9`.
+39. If the candidate is empty for a two-step scheduled command, reconstruct the two explicit `if` blocks separated by `delay(...)` rather than returning empty code.
+40. Repair weekend periodic checks to the weekend cron plus weekday guard pattern when the command says "during weekends" or "주말 동안".
+41. Repair "when/once X happens, then every N seconds/minutes do Y" to the `active := 0` skeleton: wait once inside `if (active == 0)`, set `active = 1`, then put the repeated action outside the block.
+42. Repair smoke/fire siren mode to `"fire"` unless the command explicitly says emergency.
+43. Repair `LaundryDryer` finished checks to `laundrydryer_spinspeed == 0`.
+44. Repair repeating open/close window actions to `windowcovering_uporopen()` / `windowcovering_downorclose()`.
+
+Self-check before final output:
+- JSON parses
+- required keys present
+- canonical_name preferred when available
+- receiver tags after # use uppercase-first title/Camel case, and member tokens after `).` or `all(...).` are lowercased
+- args and enums match schema
+- temporal structure matches the command when delay/repeat/trigger logic is requested
+- no commentary, no markdown, no code fence
+
+### EXEMPLAR 1: service naming repair
+Input command_eng:
+Set the television channel to 30.
+
+Bad candidate:
+{"name":"TVChannelChange","cron":"","period":-1,"code":"(#Television).setChannel(30)"}
+
+Diagnostics:
+service name is not in schema; canonical_name required; expected integer argument is already correct.
+
+Relevant schema example:
+{
+  "selected_devices": [
+    {
+      "device": "Television",
+      "services": [
+        {"service": "SetChannel", "canonical_name": "Television_SetChannel", "type": "function", "argument_type": "INTEGER", "return_type": "VOID"}
+      ]
+    }
+  ]
+}
+
+Correct repaired output:
+{"name":"TVChannelChange","cron":"","period":0,"code":"(#Television).television_setchannel(30)"}
+
+### EXEMPLAR 2: argument type repair
+Input command_eng:
+Set the speaker volume to 70.
+
+Bad candidate:
+{"name":"SetSpeakerVolume70","cron":"","period":-1,"code":"(#Speaker).Speaker_SetVolume(\"70\")"}
+
+Diagnostics:
+argument type mismatch; expected INTEGER, got STRING literal.
+
+Relevant schema example:
+{
+  "selected_devices": [
+    {
+      "device": "Speaker",
+      "services": [
+        {"service": "Speaker_SetVolume", "raw_service": "SetVolume", "canonical_name": "Speaker_SetVolume", "type": "function", "argument_type": "INTEGER", "return_type": "INTEGER"}
+      ]
+    }
+  ]
+}
+
+Correct repaired output:
+{"name":"SetSpeakerVolume70","cron":"","period":0,"code":"(#Speaker).speaker_setvolume(70)"}
+
+### EXEMPLAR 3: value/function confusion repair
+Input command_eng:
+When a leak is detected, close the valve.
+
+Bad candidate:
+{"name":"CloseValveOnLeak","cron":"","period":-1,"code":"if ((#LeakSensor).LeakSensor_Leakage()) { (#Valve).Valve_Close() }"}
+
+Diagnostics:
+condition uses a function call pattern but Leakage is a BOOL value; rewrite condition to compare the value.
+
+Relevant schema example:
+{
+  "selected_devices": [
+    {
+      "device": "LeakSensor",
+      "services": [
+        {"service": "LeakSensor_Leakage", "raw_service": "Leakage", "canonical_name": "LeakSensor_Leakage", "type": "value", "return_type": "BOOL"}
+      ]
+    },
+    {
+      "device": "Valve",
+      "services": [
+        {"service": "Valve_Close", "raw_service": "Close", "canonical_name": "Valve_Close", "type": "function", "return_type": "VOID"}
+      ]
+    }
+  ]
+}
+
+Correct repaired output:
+{"name":"CloseValveOnLeak","cron":"","period":0,"code":"wait until ((#LeakSensor).leaksensor_leakage == true)\n(#Valve).valve_close()"}
+
+SCHEDULE REPAIR SKETCH
+Bad candidate:
+{"name":"OpenF3EvenBlindsAt9AM","cron":"0 9 * * *","period":0,"code":""}
+
+Correct repaired output:
+{"name":"OpenF3EvenBlindsAt9AM","cron":"0 9 * * *","period":0,"code":"all(#Floor3 #Even #Blind).WindowCovering_UpOrOpen()"}
+
+WEEKEND PERIODIC REPAIR SKETCH
+Bad candidate:
+{"name":"TogglePumpWeekends","cron":"0 0 * * 0,6","period":0,"code":"if ((#Pump).Switch_Switch == false) {\n    (#Pump).Switch_On()\n} else {\n    (#Pump).Switch_Off()\n}"}
+
+Correct repaired output:
+{"name":"TogglePumpWeekends","cron":"0 0 * * 6-7","period":5000,"code":"if ((#Clock).Clock_Weekday != \"saturday\" and (#Clock).Clock_Weekday != \"sunday\") {\n    break\n}\n(#Pump).Switch_Toggle()"}
+
+EVENT MAX-BRIGHTNESS REPAIR SKETCH
+Bad candidate:
+{"name":"TurnOnEntranceLightFor3Seconds","cron":"","period":0,"code":"(#Ent_Light).Light_MoveToBrightness(100)\ndelay(3 SECOND)\n(#Ent_Light).Light_MoveToBrightness(0)"}
+
+Correct repaired output:
+{"name":"TurnOnEntranceLightFor3Seconds","cron":"","period":100,"code":"prev := (#Entrance #MotionSensor).MotionSensor_Motion\ncurr = (#Entrance #MotionSensor).MotionSensor_Motion\nif (prev == false and curr == true) {\n    (#Entrance #Light).LevelControl_MoveToLevel(100, 0)\n    delay(3 SEC)\n    (#Entrance #Light).Switch_Off()\n}\nprev = curr"}
+
+TIME-WINDOW REPAIR SKETCH
+Bad candidate:
+{"name":"SoundEmergencySirenUntil3PM","cron":"","period":0,"code":"(#Siren).Siren_SetSirenMode(\"emergency\")\ndelay(5 SEC)\n(#Siren).Switch_Off()"}
+
+Correct repaired output:
+{"name":"SoundEmergencySirenUntil3PM","cron":"","period":600000,"code":"if ((#Clock).Clock_Hour == 15) {\n    break\n}\n(#Siren).Siren_SetSirenMode(\"emergency\")\ndelay(5 SEC)\n(#Siren).Switch_Off()"}
+
+GROUP EVENT REPAIR SKETCH
+Bad candidate:
+{"name":"TurnOnAllLightsInHallAndLivingRoom","cron":"","period":0,"code":"(#Hall_Light).Switch_On()\n(#LR_Light).Switch_On()"}
+
+Correct repaired output:
+{"name":"TurnOnAllLightsInHallAndLivingRoom","cron":"","period":100,"code":"prev := (#Door).Door_DoorState\ncurr = (#Door).Door_DoorState\nif (prev != \"open\" and curr == \"open\") {\n    all(#Hallway #Light).Switch_On()\n    all(#LivingRoom #Light).Switch_On()\n}\nprev = curr"}
+
+BUTTON2 REPAIR SKETCH
+Bad candidate:
+{"name":"OpenAllWindowsInLivingRoom","cron":"","period":0,"code":"wait until ((#LR_MB).Button_Button == \"pushed_2x\")\n(#LR_Win).WindowCovering_UpOrOpen()"}
+
+Correct repaired output:
+{"name":"OpenAllWindowsInLivingRoom","cron":"","period":100,"code":"prev := (#MultiButton).DimmerSwitch_Button2\ncurr = (#MultiButton).DimmerSwitch_Button2\nif (prev != \"pushed\" and curr == \"pushed\") {\n    all(#LivingRoom #Window).WindowCovering_UpOrOpen()\n}\nprev = curr"}
+
+SENSOR-TO-ACTUATOR REPAIR SKETCH
+Bad candidate:
+{"name":"AnnounceTemperature","cron":"","period":0,"code":"(#TemperatureSensor).TemperatureSensor_Speak((#TemperatureSensor).TemperatureSensor_Temperature.toString())"}
+
+Correct repaired output:
+{"name":"AnnounceTemperature","cron":"","period":0,"code":"temp = (#TemperatureSensor).TemperatureSensor_Temperature\n(#Speaker).Speaker_Speak(\"현재 온도는 \" + temp + \"도입니다\")"}

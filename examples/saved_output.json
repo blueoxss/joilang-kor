@@ -1,0 +1,11 @@
+{
+  "text": "```json\n{\n  \"name\": \"BlindOpeningSchedule\",\n  \"cron\": \"0 8 * * *\",\n  \"period\": 1000 * 60 * 60 * 24,  // 24 hours\n  \"code\": \"\n    if ((#Clock).clock_hour == 8) {\n      all(#Odd #Blind).windowcovering_uporopen()\n      delay(1 HOUR)\n    }\n    if ((#Clock).clock_hour == 9) {\n      all(#Even #Blind).windowcovering_uporopen()\n    }\n  \"\n}\n```",
+  "provenance": {
+    "kind": "stored_model_output",
+    "model": "Qwen2.5-Coder-7B-Instruct",
+    "prompt": "DirectTransfer(원 프롬프트, 서비스 목록 ver2.0.1)",
+    "run": "재현 실행 run 20260827T031704 (2026-08-27 시작, 2026-09-01 완료)",
+    "dataset_row_no": 214,
+    "note": "실험 기록에서 그대로 가져온 모델 출력(주석·수식이 섞여 JSON 파싱에 실패하는 예). 성능 수치의 근거로 쓰지 않는다."
+  }
+}

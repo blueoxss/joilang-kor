@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite it as below."
+title: "joilang-kor"
+type: software
+authors:
+  - family-names: Jeong
+    given-names: Mingi
+version: 0.1.0
+repository-code: "https://github.com/blueoxss/joilang-kor"
+abstract: "JOILang language reference, the minimal natural-language-to-JOILang conversion path, the source prompt and initial prompt blocks used in the GPS-PromptOps experiments, and the JOICommands-280 evaluation set."
+keywords:
+  - JOILang
+  - IoT
+  - domain-specific language
+  - LLM code generation

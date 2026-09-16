@@ -1,0 +1,15 @@
+{
+  "description": "JOICommands-280 행 (category 7, index 34). connected_devices 가 있어 서비스 문맥은 연결 장치의 범주(WindowCovering)만으로 구성된다.",
+  "dataset_row_no": 214,
+  "category": "7",
+  "index": "34",
+  "command_kor": "아침 8시에 홀수 태그가 붙은 블라인드를 모두 열어주고, 9시에는 짝수 태그가 붙은 모든 블라인드를 열어줘.",
+  "command_eng": "Every 8 AM, open all blinds with odd tags, and at 9 AM, open all blinds with even tags.",
+  "connected_devices": "{'Odd_Blind': {'category': ['WindowCovering'], 'tags': ['Odd', 'Blind', 'WindowCovering']}, 'Even_Blind': {'category': ['WindowCovering'], 'tags': ['Even', 'Blind', 'WindowCovering']}, 'Fixed_Window': {'category': ['WindowCovering'], 'tags': ['Fixed', 'WindowCovering']}}",
+  "reference": "{\"name\": \"\", \n\"cron\": \"0 8 * * *\", \n\"period\": 0, \n\"script\": \"\\nall(#Odd #Blind).windowcovering_uporopen()\\n\\ndelay(1 HOUR)\\n\\nall(#Even #Blind).windowcovering_uporopen()\"}",
+  "saved_output": "saved_output.json",
+  "source": {
+    "dataset": "datasets/JOICommands-280.csv",
+    "note": "reference 는 DET 평가에만 쓰이며 생성 입력에 들어가지 않는다."
+  }
+}

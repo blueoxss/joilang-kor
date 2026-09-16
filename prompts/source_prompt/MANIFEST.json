@@ -1,0 +1,62 @@
+{
+ "description": "실험의 출발점으로 사용한 클라우드 LLM용 원 프롬프트의 구성 파일(원본 그대로). 조립 순서와 감싸는 지시문은 src/joilang_kor/prompts.py: render_source_prompt 가 원본 조립 코드와 같게 재현한다.",
+ "source_version": "원본 개발 저장소(비공개) 커밋 ebac3937 의 프롬프트 자산 5개(디렉터리 생성 2026-03-27, 마지막 내용 수정 2026-05-08) — 조립 코드: 같은 커밋의 pipeline_common.render_legacy_v13_monolithic_prompt",
+ "assembly_order": [
+  {
+   "section": "role_and_task",
+   "origin": "render_source_prompt 상수",
+   "note": "역할·과제 설명, 허용 키워드"
+  },
+  {
+   "section": "device_and_service_mapping",
+   "file": "service_prompt_10.md",
+   "note": "서비스 문맥: 뒤에 입력별 [service_list_value]/[service_list_function] 삽입"
+  },
+  {
+   "section": "grammar",
+   "file": "grammar_ver1.5.10.md"
+  },
+  {
+   "section": "condition_combination_rules",
+   "file": "tempo_prompt_9.md"
+  },
+  {
+   "section": "important_cautions",
+   "file": "caution_prompt_8.md",
+   "note": "뒤에 [connected_devices] 범주 요약, [userinfo] 삽입"
+  },
+  {
+   "section": "response_steps_and_examples",
+   "file": "response_prompt_baseline_cot.md",
+   "note": "명령-코드 예제 포함"
+  },
+  {
+   "section": "reasoning_contract_and_output_format",
+   "origin": "render_source_prompt 상수",
+   "note": "숨은 추론 계약, JSON 출력 형식"
+  }
+ ],
+ "files": {
+  "caution_prompt_8.md": {
+   "sha256": "0353b5e34b8ea5c9830578c94d50a90e678dfbf7ce57a45d30b41df978277e9c",
+   "bytes": 24320
+  },
+  "grammar_ver1.5.10.md": {
+   "sha256": "0065eb550c13c58f683085ad16c5c45b6a9fd4870ef9c907481953f8d190a8a6",
+   "bytes": 15301
+  },
+  "response_prompt_baseline_cot.md": {
+   "sha256": "faa1b0ba7dbde58341e9756ff74e116456d34bdc515efbc26fc0680ec873ff20",
+   "bytes": 13363
+  },
+  "service_prompt_10.md": {
+   "sha256": "8f64ba140db7d07aec015182d3e86a15c6ff69e3ef04c41602637fcc5ec06d74",
+   "bytes": 22676
+  },
+  "tempo_prompt_9.md": {
+   "sha256": "35412ccb0e85f81295e99de0ff2da29e66281aa959410931ed0e9bdf7e86f892",
+   "bytes": 14294
+  }
+ },
+ "verified_against_runs": "DirectTransfer 재현 실행 3건(run 20260827T031703, 20260827T031704, 20260901T170319)의 실행 기록(행별 prompt_sha256)은 첫 행(연결 장치 없음, 전체 스키마 문맥)의 system prompt SHA-256 하나(f4c259cbb7f5fff0…)를 기록했고, 공개 조립 코드가 같은 조건의 행에 만드는 prompt 의 SHA-256 과 일치한다. 연결 장치가 있는 행의 행별 프롬프트는 그 기록으로 대조하지 않았다."
+}

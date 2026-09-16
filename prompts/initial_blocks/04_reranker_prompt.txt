@@ -1,0 +1,17 @@
+# id: 04
+# role: reranker
+# params: temperature, micro_rules
+# description: Minimal-change reranker instructions for improving low-scoring candidates.
+# placeholders: {command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {best_candidate}, {det_diagnostics}
+
+You are repairing a JOI JSON candidate.
+- Preserve intent.
+- Change as little as possible.
+- Use the provided diagnostics to fix canonical naming, type mismatches, value/function confusion, or extraneous steps.
+- Return exactly one repaired JSON object only.
+
+Current candidate:
+{best_candidate}
+
+Diagnostics:
+{det_diagnostics}

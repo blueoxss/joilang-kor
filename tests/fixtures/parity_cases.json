@@ -1,0 +1,3797 @@
+{
+ "description": "원본 함수를 같은 입력으로 실행해 고정한 기대값(공개본 함수와 대조하는 테스트가 읽는다).",
+ "sources": {
+  "evaluator": "원본 8항 평가기(det_evaluator.py)",
+  "pipeline": "원본 pipeline_common.py(구현 스냅샷 2026-04-13)",
+  "strict_checks": "원본 strict 평가기의 스키마 검사부(det_evaluator.py, 구현 스냅샷 2026-04-13)",
+  "outputs": "원본 실행 기록 fullprompt_v06_ver201 (2026-07-31) + 합성 경계 후보 10건"
+ },
+ "evaluation": [
+  {
+   "row_no": 1,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"DishwasherDryMode\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Dishwasher).dishwasher_setdishwashermode('dry')\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).dishwasher_setdishwashermode(\\\"dry\\\")\"}",
+   "expected": {
+    "det_score": 91.2755,
+    "det_pass": true,
+    "gt_exact": false,
+    "gt_similarity": 0.959184,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 1.0,
+    "gt_service_precision": 1.0,
+    "gt_receiver_coverage": 1.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 1.0,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch"
+    ]
+   }
+  },
+  {
+   "row_no": 3,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"RiceCookerCooking\",\n  \"cron\": \"\",\n  \"period\": 1800000,\n  \"code\": \"if ((#RiceCooker).ricecooker_ricecookermode == \\\"off\\\") {\\n  (#RiceCooker).ricecooker_setricecookermode(\\\"cooking\\\")\\n}\\n(#RiceCooker).ricecooker_addmoretime(30)\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#RiceCooker).ricecooker_setcookingparameters(\\\"cooking\\\", 1800)\"}",
+   "expected": {
+    "det_score": 40.8981,
+    "det_pass": false,
+    "gt_exact": false,
+    "gt_similarity": 0.446602,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 0.0,
+    "gt_service_precision": 0.0,
+    "gt_receiver_coverage": 1.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 0.0,
+    "enum_grounding": 1.0,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch",
+     "gt_service_coverage",
+     "unknown_service",
+     "numeric_grounding"
+    ]
+   }
+  },
+  {
+   "row_no": 5,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"SetSpeakerVolume\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Speaker).setVolume(30)\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Speaker).speaker_setvolume(30)\"}",
+   "expected": {
+    "det_score": 62.1429,
+    "det_pass": false,
+    "gt_exact": false,
+    "gt_similarity": 0.821429,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 0.0,
+    "gt_service_precision": 0.0,
+    "gt_receiver_coverage": 1.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 1.0,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch",
+     "gt_service_coverage",
+     "unknown_service"
+    ]
+   }
+  },
+  {
+   "row_no": 7,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"SwitchTVChannel\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Television).television_setchannel(7)\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Television).television_setchannel(7)\"}",
+   "expected": {
+    "det_score": 92.5,
+    "det_pass": true,
+    "gt_exact": false,
+    "gt_similarity": 1.0,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": true,
+    "gt_service_coverage": 1.0,
+    "gt_service_precision": 1.0,
+    "gt_receiver_coverage": 1.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 1.0,
+    "failure_reasons": [
+     "period_mismatch"
+    ]
+   }
+  },
+  {
+   "row_no": 9,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"TellOutdoorTemp\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_temperatureWeather)\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\ntemp = (#WeatherProvider).weatherprovider_temperatureweather\\n\\n(#Speaker).speaker_speak(\\\"외부 온도는 \\\" + temp + \\\"도입니다\\\")\"}",
+   "expected": {
+    "det_score": 45.0532,
+    "det_pass": false,
+    "gt_exact": false,
+    "gt_similarity": 0.585106,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 0.0,
+    "gt_service_precision": 0.0,
+    "gt_receiver_coverage": 0.5,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 0.0,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch",
+     "gt_service_coverage",
+     "unknown_service",
+     "gt_receiver_coverage",
+     "enum_grounding"
+    ]
+   }
+  },
+  {
+   "row_no": 11,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"TellOutdoorHumidity\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_humidityWeather)\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nhum = (#WeatherProvider).weatherprovider_humidityweather\\n\\n(#Speaker).speaker_speak(\\\"외부 습도는 \\\" + hum + \\\"%입니다\\\")\"}",
+   "expected": {
+    "det_score": 44.1667,
+    "det_pass": false,
+    "gt_exact": false,
+    "gt_similarity": 0.555556,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 0.0,
+    "gt_service_precision": 0.0,
+    "gt_receiver_coverage": 0.5,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 0.0,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch",
+     "gt_service_coverage",
+     "unknown_service",
+     "gt_receiver_coverage",
+     "enum_grounding"
+    ]
+   }
+  },
+  {
+   "row_no": 13,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"AnnounceFineDustLevel\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Speaker).mediaPlayback_speak((#AirQualityDetector).dustSensor_fineDustLevel)\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\ndust = (#AirQualitySensor).airqualitysensor_dustlevel\\n\\n(#Speaker).speaker_speak(\\\"미세먼지 농도는 \\\" + dust + \\\"입니다\\\")\"}",
+   "expected": {
+    "det_score": 37.7857,
+    "det_pass": false,
+    "gt_exact": false,
+    "gt_similarity": 0.342857,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 0.0,
+    "gt_service_precision": 0.0,
+    "gt_receiver_coverage": 0.5,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 0.0,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch",
+     "gt_service_coverage",
+     "unknown_service",
+     "gt_receiver_coverage",
+     "enum_grounding"
+    ]
+   }
+  },
+  {
+   "row_no": 15,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"GenerateCatImage\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#CloudServiceProvider).generateimage(\\\"cat.png\\\")\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nimg = (#CloudServiceProvider).cloudserviceprovider_generateimage(\\\"Generate a cat image\\\")\\n\\n(#CloudServiceProvider).cloudserviceprovider_savetofile(img, \\\"cat.png\\\")\"}",
+   "expected": {
+    "det_score": 44.3284,
+    "det_pass": false,
+    "gt_exact": false,
+    "gt_similarity": 0.477612,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 0.0,
+    "gt_service_precision": 0.0,
+    "gt_receiver_coverage": 0.5,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 0.5,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch",
+     "gt_service_coverage",
+     "unknown_service",
+     "gt_receiver_coverage",
+     "enum_grounding"
+    ]
+   }
+  },
+  {
+   "row_no": 17,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"TellTodayMenu\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Speaker).mediaPlayback_speak((#MenuProvider).menuprovider_todaymenu)\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nmenu = (#MenuProvider).menuprovider_todaymenu\\n\\n(#Speaker).speaker_speak(\\\"오늘의 메뉴는 \\\" + menu + \\\"입니다\\\")\"}",
+   "expected": {
+    "det_score": 55.5696,
+    "det_pass": false,
+    "gt_exact": false,
+    "gt_similarity": 0.518987,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 0.5,
+    "gt_service_precision": 0.5,
+    "gt_receiver_coverage": 0.5,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 0.0,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch",
+     "gt_service_coverage",
+     "unknown_service",
+     "gt_receiver_coverage",
+     "enum_grounding"
+    ]
+   }
+  },
+  {
+   "row_no": 19,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"AskCloudAIAboutLLM\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#CloudServiceProvider).cloudserviceprovider_chatwithai(\\\"What is an LLM?\\\")\\n(#Speaker).mediaPlayback_speak((#CloudServiceProvider).cloudserviceprovider_chatwithai(\\\"What is an LLM?\\\"))\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nanswer = (#CloudServiceProvider).cloudserviceprovider_chatwithai(\\\"What is LLM?\\\")\\n\\n(#Speaker).speaker_speak(answer)\"}",
+   "expected": {
+    "det_score": 63.1206,
+    "det_pass": false,
+    "gt_exact": false,
+    "gt_similarity": 0.659574,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 0.5,
+    "gt_service_precision": 0.333333,
+    "gt_receiver_coverage": 1.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 0.0,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch",
+     "gt_service_coverage",
+     "unknown_service",
+     "enum_grounding"
+    ]
+   }
+  },
+  {
+   "row_no": 21,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"ChangeLightColorToYellow\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Light).colorControl_setColor(\\\"255|255|0\\\")\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\n(#Light).light_movetorgb(255, 255, 0)\"}",
+   "expected": {
+    "det_score": 56.7308,
+    "det_pass": false,
+    "gt_exact": false,
+    "gt_similarity": 0.641026,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 0.0,
+    "gt_service_precision": 0.0,
+    "gt_receiver_coverage": 1.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 1.0,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch",
+     "gt_service_coverage",
+     "unknown_service"
+    ]
+   }
+  },
+  {
+   "row_no": 23,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"CloseDoor\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Door).doorControl_close()\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\n(#Door).door_close()\"}",
+   "expected": {
+    "det_score": 63.0319,
+    "det_pass": false,
+    "gt_exact": false,
+    "gt_similarity": 0.851064,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 0.0,
+    "gt_service_precision": 0.0,
+    "gt_receiver_coverage": 1.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 1.0,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch",
+     "gt_service_coverage",
+     "unknown_service"
+    ]
+   }
+  },
+  {
+   "row_no": 25,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"StopRobotVacuum\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode('stop')\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\\\"stop\\\")\"}",
+   "expected": {
+    "det_score": 91.7308,
+    "det_pass": true,
+    "gt_exact": false,
+    "gt_similarity": 0.974359,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 1.0,
+    "gt_service_precision": 1.0,
+    "gt_receiver_coverage": 1.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 1.0,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch"
+    ]
+   }
+  },
+  {
+   "row_no": 27,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"SetMaxVolume\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Speaker).setVolume(100)\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\n(#Speaker).speaker_setvolume(100)\"}",
+   "expected": {
+    "det_score": 62.3276,
+    "det_pass": false,
+    "gt_exact": false,
+    "gt_similarity": 0.827586,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 0.0,
+    "gt_service_precision": 0.0,
+    "gt_receiver_coverage": 1.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 1.0,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch",
+     "gt_service_coverage",
+     "unknown_service"
+    ]
+   }
+  },
+  {
+   "row_no": 29,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"ValveOpen\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Valve).valve_open()\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\n(#Valve).valve_open()\"}",
+   "expected": {
+    "det_score": 92.5,
+    "det_pass": true,
+    "gt_exact": false,
+    "gt_similarity": 1.0,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": true,
+    "gt_service_coverage": 1.0,
+    "gt_service_precision": 1.0,
+    "gt_receiver_coverage": 1.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 1.0,
+    "failure_reasons": [
+     "period_mismatch"
+    ]
+   }
+  },
+  {
+   "row_no": 31,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"LivingRoomLightYellow\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Light).colorControl_setColor(\\\"255|255|0\\\")\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#LivingRoom #Light).colorcontrol_setcolor(\\\"255,255,0\\\")\"}",
+   "expected": {
+    "det_score": 46.6237,
+    "det_pass": false,
+    "gt_exact": false,
+    "gt_similarity": 0.804124,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 0.0,
+    "gt_service_precision": 0.0,
+    "gt_receiver_coverage": 0.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 0.0,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch",
+     "gt_service_coverage",
+     "unknown_service",
+     "gt_receiver_coverage",
+     "enum_grounding"
+    ]
+   }
+  },
+  {
+   "row_no": 33,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"LivingRoomLightBrightness\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#LivingRoomLight).light_movetobrightness(80)\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#LivingRoom #Light).light_movetobrightness(80, 0)\"}",
+   "expected": {
+    "det_score": 76.5323,
+    "det_pass": true,
+    "gt_exact": false,
+    "gt_similarity": 0.967742,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 1.0,
+    "gt_service_precision": 1.0,
+    "gt_receiver_coverage": 0.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 0.5,
+    "enum_grounding": 1.0,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch",
+     "gt_receiver_coverage",
+     "numeric_grounding"
+    ]
+   }
+  },
+  {
+   "row_no": 35,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"LivingRoomLightColorSet\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#LivingRoomLight).light_movetohue(240)\\n(#LivingRoomLight).light_movetosaturation(80)\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#LivingRoom #Light).light_movetohueandsaturation(240, 80)\"}",
+   "expected": {
+    "det_score": 48.5,
+    "det_pass": false,
+    "gt_exact": false,
+    "gt_similarity": 0.7,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 0.0,
+    "gt_service_precision": 0.0,
+    "gt_receiver_coverage": 0.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 1.0,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch",
+     "gt_service_coverage",
+     "unknown_service",
+     "gt_receiver_coverage"
+    ]
+   }
+  },
+  {
+   "row_no": 37,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"LockAllDoorLocks\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"all(#DoorLock).doorlock_lock()\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"all(#DoorLock).doorlock_lock()\"}",
+   "expected": {
+    "det_score": 92.5,
+    "det_pass": true,
+    "gt_exact": false,
+    "gt_similarity": 1.0,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": true,
+    "gt_service_coverage": 1.0,
+    "gt_service_precision": 1.0,
+    "gt_receiver_coverage": 1.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 1.0,
+    "failure_reasons": [
+     "period_mismatch"
+    ]
+   }
+  },
+  {
+   "row_no": 39,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"ChangeAirPurifierMode\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#BedroomAirPurifier).airpurifier_setairpurifiermode('sleep')\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Bedroom #AirPurifier).airpurifier_setairpurifiermode(\\\"sleep\\\")\"}",
+   "expected": {
+    "det_score": 81.2805,
+    "det_pass": true,
+    "gt_exact": false,
+    "gt_similarity": 0.95935,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 1.0,
+    "gt_service_precision": 1.0,
+    "gt_receiver_coverage": 0.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 1.0,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch",
+     "gt_receiver_coverage"
+    ]
+   }
+  },
+  {
+   "row_no": 41,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"OpenAllSafes\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"all(#Safe).safe_lock()\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"all(#Safe).safe_unlock()\"}",
+   "expected": {
+    "det_score": 66.1957,
+    "det_pass": false,
+    "gt_exact": false,
+    "gt_similarity": 0.956522,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 0.0,
+    "gt_service_precision": 0.0,
+    "gt_receiver_coverage": 1.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 1.0,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch",
+     "gt_service_coverage",
+     "unknown_service"
+    ]
+   }
+  },
+  {
+   "row_no": 43,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"FireSirenAlert\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Siren).sirenMode_setSirenMode(\\\"fire\\\")\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Farm #Siren).siren_setsirenmode(\\\"fire\\\")\"}",
+   "expected": {
+    "det_score": 52.5633,
+    "det_pass": false,
+    "gt_exact": false,
+    "gt_similarity": 0.835443,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 0.0,
+    "gt_service_precision": 0.0,
+    "gt_receiver_coverage": 0.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 1.0,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch",
+     "gt_service_coverage",
+     "unknown_service",
+     "gt_receiver_coverage"
+    ]
+   }
+  },
+  {
+   "row_no": 45,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"TurnOffBedroomLights\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"all(#BedroomLight).switch_off()\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"all(#Bedroom #Light).switch_off()\"}",
+   "expected": {
+    "det_score": 82.0238,
+    "det_pass": true,
+    "gt_exact": false,
+    "gt_similarity": 0.984127,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 1.0,
+    "gt_service_precision": 1.0,
+    "gt_receiver_coverage": 0.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 1.0,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch",
+     "gt_receiver_coverage"
+    ]
+   }
+  },
+  {
+   "row_no": 47,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"OpenAllBlindsInSector2\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"all(#Sector2_Blind).windowShade_open()\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nall(#Sector2 #Blind).windowcovering_uporopen()\"}",
+   "expected": {
+    "det_score": 51.3554,
+    "det_pass": false,
+    "gt_exact": false,
+    "gt_similarity": 0.795181,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 0.0,
+    "gt_service_precision": 0.0,
+    "gt_receiver_coverage": 0.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 1.0,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch",
+     "gt_service_coverage",
+     "unknown_service",
+     "gt_receiver_coverage"
+    ]
+   }
+  },
+  {
+   "row_no": 49,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"LockAllSafesInSectorB\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"all(#SectorB_Odd_Safe).safe_lock()\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nall(#SectorB #Odd #Safe).safe_lock()\"}",
+   "expected": {
+    "det_score": 80.7353,
+    "det_pass": true,
+    "gt_exact": false,
+    "gt_similarity": 0.941176,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 1.0,
+    "gt_service_precision": 1.0,
+    "gt_receiver_coverage": 0.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 1.0,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch",
+     "gt_receiver_coverage"
+    ]
+   }
+  },
+  {
+   "row_no": 51,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"CloseEverythingInSector2\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"all(#Sector2).switch_off()\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nall(#Sector2).windowcovering_downorclose()\"}",
+   "expected": {
+    "det_score": 54.2647,
+    "det_pass": false,
+    "gt_exact": false,
+    "gt_similarity": 0.558824,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 0.0,
+    "gt_service_precision": 0.0,
+    "gt_receiver_coverage": 1.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 1.0,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch",
+     "gt_service_coverage",
+     "unknown_service"
+    ]
+   }
+  },
+  {
+   "row_no": 53,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"ChangeLightsInGroup1\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"all(#Group1_Light_Upper).colorControl_setColor(\\\"0|0|255\\\")\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nall(#Group1 #Top #Light).light_movetorgb(0, 0, 255)\"}",
+   "expected": {
+    "det_score": 45.9615,
+    "det_pass": false,
+    "gt_exact": false,
+    "gt_similarity": 0.615385,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 0.0,
+    "gt_service_precision": 0.0,
+    "gt_receiver_coverage": 0.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 1.0,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch",
+     "gt_service_coverage",
+     "unknown_service",
+     "gt_receiver_coverage"
+    ]
+   }
+  },
+  {
+   "row_no": 55,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"LowerEvenTaggedBlindsInBedroom\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"all(#Bedroom_EvenTagged_Blind).windowShade_close()\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nall(#Bedroom #Even #Blind).windowcovering_downorclose()\"}",
+   "expected": {
+    "det_score": 49.6359,
+    "det_pass": false,
+    "gt_exact": false,
+    "gt_similarity": 0.737864,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 0.0,
+    "gt_service_precision": 0.0,
+    "gt_receiver_coverage": 0.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 1.0,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch",
+     "gt_service_coverage",
+     "unknown_service",
+     "gt_receiver_coverage"
+    ]
+   }
+  },
+  {
+   "row_no": 57,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"LivingRoomLightsOn\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"all(#LivingRoom_Light_Odd).light_switch_on()\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nall(#LivingRoom #Wall #Odd #Light).switch_on()\"}",
+   "expected": {
+    "det_score": 50.2586,
+    "det_pass": false,
+    "gt_exact": false,
+    "gt_similarity": 0.758621,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 0.0,
+    "gt_service_precision": 0.0,
+    "gt_receiver_coverage": 0.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 1.0,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch",
+     "gt_service_coverage",
+     "unknown_service",
+     "gt_receiver_coverage"
+    ]
+   }
+  },
+  {
+   "row_no": 59,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"LockAllStorageDoorLocks\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"all(#StorageDoorLock).doorlock_lock()\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nall(#Storage #DoorLock).doorlock_lock()\"}",
+   "expected": {
+    "det_score": 82.1,
+    "det_pass": true,
+    "gt_exact": false,
+    "gt_similarity": 0.986667,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 1.0,
+    "gt_service_precision": 1.0,
+    "gt_receiver_coverage": 0.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 1.0,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch",
+     "gt_receiver_coverage"
+    ]
+   }
+  },
+  {
+   "row_no": 2,
+   "source": "gpt41mini_cloudref_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"오븐시간5분추가\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Oven).oven_addmoretime(5)\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Oven).oven_addmoretime(300)\"}",
+   "expected": {
+    "det_score": 80.3571,
+    "det_pass": true,
+    "gt_exact": false,
+    "gt_similarity": 0.928571,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 1.0,
+    "gt_service_precision": 1.0,
+    "gt_receiver_coverage": 1.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 0.0,
+    "enum_grounding": 1.0,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch",
+     "numeric_grounding"
+    ]
+   }
+  },
+  {
+   "row_no": 5,
+   "source": "gpt41mini_cloudref_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"스피커볼륨30설정\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Speaker).speaker_setvolume(30)\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Speaker).speaker_setvolume(30)\"}",
+   "expected": {
+    "det_score": 92.5,
+    "det_pass": true,
+    "gt_exact": false,
+    "gt_similarity": 1.0,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": true,
+    "gt_service_coverage": 1.0,
+    "gt_service_precision": 1.0,
+    "gt_receiver_coverage": 1.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 1.0,
+    "failure_reasons": [
+     "period_mismatch"
+    ]
+   }
+  },
+  {
+   "row_no": 8,
+   "source": "gpt41mini_cloudref_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"온도알림\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"temp = (#TemperatureSensor).temperaturesensor_temperature\\n(#Speaker).speaker_speak(\\\"Current temperature is \\\" | temp)\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\ntemp = (#TemperatureSensor).temperaturesensor_temperature\\n\\n(#Speaker).speaker_speak(\\\"현재 온도는 \\\" + temp + \\\"도입니다\\\")\"}",
+   "expected": {
+    "det_score": 82.5962,
+    "det_pass": true,
+    "gt_exact": false,
+    "gt_similarity": 0.836538,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 1.0,
+    "gt_service_precision": 1.0,
+    "gt_receiver_coverage": 1.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 0.0,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch",
+     "enum_grounding"
+    ]
+   }
+  },
+  {
+   "row_no": 11,
+   "source": "gpt41mini_cloudref_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"야외습도알림\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"humidity = (#WeatherProvider).weatherprovider_humidityweather\\nmessage = \\\"현재 야외 습도는 \\\"\\nmessage = message + humidity\\nmessage = message + \\\"% 입니다.\\\"\\n(#Speaker).speaker_speak(message)\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nhum = (#WeatherProvider).weatherprovider_humidityweather\\n\\n(#Speaker).speaker_speak(\\\"외부 습도는 \\\" + hum + \\\"%입니다\\\")\"}",
+   "expected": {
+    "det_score": 76.6339,
+    "det_pass": true,
+    "gt_exact": false,
+    "gt_similarity": 0.637795,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 1.0,
+    "gt_service_precision": 1.0,
+    "gt_receiver_coverage": 1.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 0.0,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch",
+     "enum_grounding"
+    ]
+   }
+  },
+  {
+   "row_no": 14,
+   "source": "gpt41mini_cloudref_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"외부초미세먼지알림\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"pm25 = (#WeatherProvider).weatherprovider_pm25weather\\nmessage = \\\"현재 외부 초미세먼지 농도는 \\\"\\nvalueStr = pm25\\n(#Speaker).speaker_speak(message)\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\ndust = (#WeatherProvider).weatherprovider_pm10weather\\n\\n(#Speaker).speaker_speak(\\\"외부 미세먼지 농도는 \\\" + dust + \\\"입니다\\\")\"}",
+   "expected": {
+    "det_score": 54.8165,
+    "det_pass": false,
+    "gt_exact": false,
+    "gt_similarity": 0.66055,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 0.5,
+    "gt_service_precision": 0.5,
+    "gt_receiver_coverage": 1.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 0.0,
+    "enum_grounding": 0.0,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch",
+     "gt_service_coverage",
+     "unknown_service",
+     "numeric_grounding",
+     "enum_grounding"
+    ]
+   }
+  },
+  {
+   "row_no": 17,
+   "source": "gpt41mini_cloudref_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"오늘메뉴알림\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"menu = (#MenuProvider).menuprovider_todaymenu\\n(#Speaker).speaker_speak(menu)\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nmenu = (#MenuProvider).menuprovider_todaymenu\\n\\n(#Speaker).speaker_speak(\\\"오늘의 메뉴는 \\\" + menu + \\\"입니다\\\")\"}",
+   "expected": {
+    "det_score": 84.705,
+    "det_pass": true,
+    "gt_exact": false,
+    "gt_similarity": 0.906832,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 1.0,
+    "gt_service_precision": 1.0,
+    "gt_receiver_coverage": 1.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 0.0,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch",
+     "enum_grounding"
+    ]
+   }
+  },
+  {
+   "row_no": 20,
+   "source": "gpt41mini_cloudref_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"조명색조채도설정\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Light).light_movetohue(200)\\n(#Light).light_movetosaturation(50)\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\n(#Light).light_movetohueandsaturation(200, 50)\"}",
+   "expected": {
+    "det_score": 58.4174,
+    "det_pass": false,
+    "gt_exact": false,
+    "gt_similarity": 0.697248,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 0.0,
+    "gt_service_precision": 0.0,
+    "gt_receiver_coverage": 1.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 1.0,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch",
+     "gt_service_coverage",
+     "unknown_service"
+    ]
+   }
+  },
+  {
+   "row_no": 23,
+   "source": "gpt41mini_cloudref_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"문닫기\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Door).door_close()\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\n(#Door).door_close()\"}",
+   "expected": {
+    "det_score": 92.5,
+    "det_pass": true,
+    "gt_exact": false,
+    "gt_similarity": 1.0,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": true,
+    "gt_service_coverage": 1.0,
+    "gt_service_precision": 1.0,
+    "gt_receiver_coverage": 1.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 1.0,
+    "failure_reasons": [
+     "period_mismatch"
+    ]
+   }
+  },
+  {
+   "row_no": 26,
+   "source": "gpt41mini_cloudref_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"스피커음악재생\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Speaker).speaker_play(\\\"music.mp3\\\")\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\n(#Speaker).speaker_play(\\\"music.mp3\\\")\"}",
+   "expected": {
+    "det_score": 92.5,
+    "det_pass": true,
+    "gt_exact": false,
+    "gt_similarity": 1.0,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": true,
+    "gt_service_coverage": 1.0,
+    "gt_service_precision": 1.0,
+    "gt_receiver_coverage": 1.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 1.0,
+    "failure_reasons": [
+     "period_mismatch"
+    ]
+   }
+  },
+  {
+   "row_no": 29,
+   "source": "gpt41mini_cloudref_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"밸브열기\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Valve).valve_open()\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\n(#Valve).valve_open()\"}",
+   "expected": {
+    "det_score": 92.5,
+    "det_pass": true,
+    "gt_exact": false,
+    "gt_similarity": 1.0,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": true,
+    "gt_service_coverage": 1.0,
+    "gt_service_precision": 1.0,
+    "gt_receiver_coverage": 1.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 1.0,
+    "failure_reasons": [
+     "period_mismatch"
+    ]
+   }
+  },
+  {
+   "row_no": 32,
+   "source": "gpt41mini_cloudref_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"회의실카메라사진촬영\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Camera).camera_captureimage()\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#MeetingRoom #Camera).camera_captureimage()\"}",
+   "expected": {
+    "det_score": 77.6351,
+    "det_pass": true,
+    "gt_exact": false,
+    "gt_similarity": 0.837838,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 1.0,
+    "gt_service_precision": 1.0,
+    "gt_receiver_coverage": 0.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 1.0,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch",
+     "gt_receiver_coverage"
+    ]
+   }
+  },
+  {
+   "row_no": 35,
+   "source": "gpt41mini_cloudref_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"거실조명색조포화도설정\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Light #livingroom).light_movetohue(240)\\n(#Light #livingroom).light_movetosaturation(80)\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#LivingRoom #Light).light_movetohueandsaturation(240, 80)\"}",
+   "expected": {
+    "det_score": 43.9789,
+    "det_pass": false,
+    "gt_exact": false,
+    "gt_similarity": 0.549296,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 0.0,
+    "gt_service_precision": 0.0,
+    "gt_receiver_coverage": 0.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 1.0,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch",
+     "gt_service_coverage",
+     "unknown_service",
+     "gt_receiver_coverage"
+    ]
+   }
+  },
+  {
+   "row_no": 38,
+   "source": "gpt41mini_cloudref_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"Sector1에어컨온도18도설정\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#AirConditioner #Sector1).airconditioner_settargettemperature(18)\"\n}",
+   "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Sector1 #AirConditioner).airconditioner_settargettemperature(18)\"}",
+   "expected": {
+    "det_score": 78.8077,
+    "det_pass": true,
+    "gt_exact": false,
+    "gt_similarity": 0.876923,
+    "schedule_match": false,
+    "cron_match": true,
+    "period_match": false,
+    "code_match": false,
+    "gt_service_coverage": 1.0,
+    "gt_service_precision": 1.0,
+    "gt_receiver_coverage": 0.0,
+    "dataflow_score": 1.0,
+    "numeric_grounding": 1.0,
+    "enum_grounding": 1.0,
+    "failure_reasons": [
+     "period_mismatch",
+     "gt_mismatch",
+     "gt_receiver_coverage"
+    ]
+   }
+  }
+ ],
+ "normalization": [
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "any(#Light).Switch_On()",
+   "expected": "all(#Light).Switch_On()"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "(#bedroom #airconditioner).airConditioner_off()",
+   "expected": "(#bedroom #airconditioner).airConditioner_off()"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "(#Clock).clock_delay(600000)",
+   "expected": "(#Clock).clock_delay(600000)"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "(#Light).light_movetorgb(255|0|0)",
+   "expected": "(#Light).light_movetorgb(255|0|0)"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "(#Oven).oven_setcookingparameters(\"bake\"|30)",
+   "expected": "(#Oven).oven_setcookingparameters(\"bake\"|30)"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "temp = 23.0\n(#AirConditioner).airconditioner_settargettemperature(23.0)",
+   "expected": "temp = 23.0\n(#AirConditioner).airconditioner_settargettemperature(23.0)"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "(#Siren).sirenMode_setSirenMode(\"emergency\")",
+   "expected": "(#Siren).sirenMode_setSirenMode(\"emergency\")"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "(#Speaker).setVolume(30)",
+   "expected": "(#Speaker).setVolume(30)"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "all(all(#Kitchen #Light)).switch_off()",
+   "expected": "all(#Kitchen #Light).switch_off()"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "(#1stFloor #Light).switch_on()",
+   "expected": "(#1stFloor #Light).switch_on()"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "(#Dishwasher).dishwasher_setdishwashermode('dry')",
+   "expected": "(#Dishwasher).dishwasher_setdishwashermode('dry')"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "if ((#RiceCooker).ricecooker_ricecookermode == \"off\") {\n  (#RiceCooker).ricecooker_setricecookermode(\"cooking\")\n}\n(#RiceCooker).ricecooker_addmoretime(30)",
+   "expected": "if ((#RiceCooker).ricecooker_ricecookermode == \"off\") {\n  (#RiceCooker).ricecooker_setricecookermode(\"cooking\")\n}\n(#RiceCooker).ricecooker_addmoretime(30)"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "(#Speaker).setVolume(30)",
+   "expected": "(#Speaker).setVolume(30)"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "(#Television).television_setchannel(7)",
+   "expected": "(#Television).television_setchannel(7)"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "(#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_temperatureWeather)",
+   "expected": "(#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_temperatureWeather)"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "(#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_humidityWeather)",
+   "expected": "(#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_humidityWeather)"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "(#Speaker).mediaPlayback_speak((#AirQualityDetector).dustSensor_fineDustLevel)",
+   "expected": "(#Speaker).mediaPlayback_speak((#AirQualityDetector).dustSensor_fineDustLevel)"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "(#CloudServiceProvider).generateimage(\"cat.png\")",
+   "expected": "(#CloudServiceProvider).generateimage(\"cat.png\")"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "(#Speaker).mediaPlayback_speak((#MenuProvider).menuprovider_todaymenu)",
+   "expected": "(#Speaker).mediaPlayback_speak((#MenuProvider).menuprovider_todaymenu)"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "(#CloudServiceProvider).cloudserviceprovider_chatwithai(\"What is an LLM?\")\n(#Speaker).mediaPlayback_speak((#CloudServiceProvider).cloudserviceprovider_chatwithai(\"What is an LLM?\"))",
+   "expected": "(#CloudServiceProvider).cloudserviceprovider_chatwithai(\"What is an LLM?\")\n(#Speaker).mediaPlayback_speak((#CloudServiceProvider).cloudserviceprovider_chatwithai(\"What is an LLM?\"))"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "(#Light).colorControl_setColor(\"255|255|0\")",
+   "expected": "(#Light).colorControl_setColor(\"255|255|0\")"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "(#Door).doorControl_close()",
+   "expected": "(#Door).doorControl_close()"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode('stop')",
+   "expected": "(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode('stop')"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "(#Speaker).setVolume(100)",
+   "expected": "(#Speaker).setVolume(100)"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "(#Valve).valve_open()",
+   "expected": "(#Valve).valve_open()"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "(#Light).colorControl_setColor(\"255|255|0\")",
+   "expected": "(#Light).colorControl_setColor(\"255|255|0\")"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "(#LivingRoomLight).light_movetobrightness(80)",
+   "expected": "(#LivingRoomLight).light_movetobrightness(80)"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "(#LivingRoomLight).light_movetohue(240)\n(#LivingRoomLight).light_movetosaturation(80)",
+   "expected": "(#LivingRoomLight).light_movetohue(240)\n(#LivingRoomLight).light_movetosaturation(80)"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "all(#DoorLock).doorlock_lock()",
+   "expected": "all(#DoorLock).doorlock_lock()"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "(#BedroomAirPurifier).airpurifier_setairpurifiermode('sleep')",
+   "expected": "(#BedroomAirPurifier).airpurifier_setairpurifiermode('sleep')"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "all(#Safe).safe_lock()",
+   "expected": "all(#Safe).safe_lock()"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "(#Siren).sirenMode_setSirenMode(\"fire\")",
+   "expected": "(#Siren).sirenMode_setSirenMode(\"fire\")"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "all(#BedroomLight).switch_off()",
+   "expected": "all(#BedroomLight).switch_off()"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "all(#Sector2_Blind).windowShade_open()",
+   "expected": "all(#Sector2_Blind).windowShade_open()"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "all(#SectorB_Odd_Safe).safe_lock()",
+   "expected": "all(#SectorB_Odd_Safe).safe_lock()"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "all(#Sector2).switch_off()",
+   "expected": "all(#Sector2).switch_off()"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "all(#Group1_Light_Upper).colorControl_setColor(\"0|0|255\")",
+   "expected": "all(#Group1_Light_Upper).colorControl_setColor(\"0|0|255\")"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "all(#Bedroom_EvenTagged_Blind).windowShade_close()",
+   "expected": "all(#Bedroom_EvenTagged_Blind).windowShade_close()"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "all(#LivingRoom_Light_Odd).light_switch_on()",
+   "expected": "all(#LivingRoom_Light_Odd).light_switch_on()"
+  },
+  {
+   "function": "normalize_receiver_quantifiers_in_code",
+   "code": "all(#StorageDoorLock).doorlock_lock()",
+   "expected": "all(#StorageDoorLock).doorlock_lock()"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "any(#Light).Switch_On()",
+   "expected": "any(#Light).switch_on()"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "(#bedroom #airconditioner).airConditioner_off()",
+   "expected": "(#bedroom #airconditioner).airconditioner_off()"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "(#Clock).clock_delay(600000)",
+   "expected": "(#Clock).clock_delay(600000)"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "(#Light).light_movetorgb(255|0|0)",
+   "expected": "(#Light).light_movetorgb(255|0|0)"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "(#Oven).oven_setcookingparameters(\"bake\"|30)",
+   "expected": "(#Oven).oven_setcookingparameters(\"bake\"|30)"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "temp = 23.0\n(#AirConditioner).airconditioner_settargettemperature(23.0)",
+   "expected": "temp = 23.0\n(#AirConditioner).airconditioner_settargettemperature(23.0)"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "(#Siren).sirenMode_setSirenMode(\"emergency\")",
+   "expected": "(#Siren).sirenmode_setsirenmode(\"emergency\")"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "(#Speaker).setVolume(30)",
+   "expected": "(#Speaker).setvolume(30)"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "all(all(#Kitchen #Light)).switch_off()",
+   "expected": "all(all(#Kitchen #Light)).switch_off()"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "(#1stFloor #Light).switch_on()",
+   "expected": "(#1stFloor #Light).switch_on()"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "(#Dishwasher).dishwasher_setdishwashermode('dry')",
+   "expected": "(#Dishwasher).dishwasher_setdishwashermode('dry')"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "if ((#RiceCooker).ricecooker_ricecookermode == \"off\") {\n  (#RiceCooker).ricecooker_setricecookermode(\"cooking\")\n}\n(#RiceCooker).ricecooker_addmoretime(30)",
+   "expected": "if ((#RiceCooker).ricecooker_ricecookermode == \"off\") {\n  (#RiceCooker).ricecooker_setricecookermode(\"cooking\")\n}\n(#RiceCooker).ricecooker_addmoretime(30)"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "(#Speaker).setVolume(30)",
+   "expected": "(#Speaker).setvolume(30)"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "(#Television).television_setchannel(7)",
+   "expected": "(#Television).television_setchannel(7)"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "(#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_temperatureWeather)",
+   "expected": "(#Speaker).mediaplayback_speak((#WeatherProvider).weatherprovider_temperatureweather)"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "(#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_humidityWeather)",
+   "expected": "(#Speaker).mediaplayback_speak((#WeatherProvider).weatherprovider_humidityweather)"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "(#Speaker).mediaPlayback_speak((#AirQualityDetector).dustSensor_fineDustLevel)",
+   "expected": "(#Speaker).mediaplayback_speak((#AirQualityDetector).dustsensor_finedustlevel)"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "(#CloudServiceProvider).generateimage(\"cat.png\")",
+   "expected": "(#CloudServiceProvider).generateimage(\"cat.png\")"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "(#Speaker).mediaPlayback_speak((#MenuProvider).menuprovider_todaymenu)",
+   "expected": "(#Speaker).mediaplayback_speak((#MenuProvider).menuprovider_todaymenu)"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "(#CloudServiceProvider).cloudserviceprovider_chatwithai(\"What is an LLM?\")\n(#Speaker).mediaPlayback_speak((#CloudServiceProvider).cloudserviceprovider_chatwithai(\"What is an LLM?\"))",
+   "expected": "(#CloudServiceProvider).cloudserviceprovider_chatwithai(\"What is an LLM?\")\n(#Speaker).mediaplayback_speak((#CloudServiceProvider).cloudserviceprovider_chatwithai(\"What is an LLM?\"))"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "(#Light).colorControl_setColor(\"255|255|0\")",
+   "expected": "(#Light).colorcontrol_setcolor(\"255|255|0\")"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "(#Door).doorControl_close()",
+   "expected": "(#Door).doorcontrol_close()"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode('stop')",
+   "expected": "(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode('stop')"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "(#Speaker).setVolume(100)",
+   "expected": "(#Speaker).setvolume(100)"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "(#Valve).valve_open()",
+   "expected": "(#Valve).valve_open()"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "(#Light).colorControl_setColor(\"255|255|0\")",
+   "expected": "(#Light).colorcontrol_setcolor(\"255|255|0\")"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "(#LivingRoomLight).light_movetobrightness(80)",
+   "expected": "(#LivingRoomLight).light_movetobrightness(80)"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "(#LivingRoomLight).light_movetohue(240)\n(#LivingRoomLight).light_movetosaturation(80)",
+   "expected": "(#LivingRoomLight).light_movetohue(240)\n(#LivingRoomLight).light_movetosaturation(80)"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "all(#DoorLock).doorlock_lock()",
+   "expected": "all(#DoorLock).doorlock_lock()"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "(#BedroomAirPurifier).airpurifier_setairpurifiermode('sleep')",
+   "expected": "(#BedroomAirPurifier).airpurifier_setairpurifiermode('sleep')"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "all(#Safe).safe_lock()",
+   "expected": "all(#Safe).safe_lock()"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "(#Siren).sirenMode_setSirenMode(\"fire\")",
+   "expected": "(#Siren).sirenmode_setsirenmode(\"fire\")"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "all(#BedroomLight).switch_off()",
+   "expected": "all(#BedroomLight).switch_off()"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "all(#Sector2_Blind).windowShade_open()",
+   "expected": "all(#Sector2_Blind).windowshade_open()"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "all(#SectorB_Odd_Safe).safe_lock()",
+   "expected": "all(#SectorB_Odd_Safe).safe_lock()"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "all(#Sector2).switch_off()",
+   "expected": "all(#Sector2).switch_off()"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "all(#Group1_Light_Upper).colorControl_setColor(\"0|0|255\")",
+   "expected": "all(#Group1_Light_Upper).colorcontrol_setcolor(\"0|0|255\")"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "all(#Bedroom_EvenTagged_Blind).windowShade_close()",
+   "expected": "all(#Bedroom_EvenTagged_Blind).windowshade_close()"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "all(#LivingRoom_Light_Odd).light_switch_on()",
+   "expected": "all(#LivingRoom_Light_Odd).light_switch_on()"
+  },
+  {
+   "function": "lowercase_service_members_in_code",
+   "code": "all(#StorageDoorLock).doorlock_lock()",
+   "expected": "all(#StorageDoorLock).doorlock_lock()"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "any(#Light).Switch_On()",
+   "expected": "any(#Light).Switch_On()"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "(#bedroom #airconditioner).airConditioner_off()",
+   "expected": "(#Bedroom #AirConditioner).airConditioner_off()"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "(#Clock).clock_delay(600000)",
+   "expected": "(#Clock).clock_delay(600000)"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "(#Light).light_movetorgb(255|0|0)",
+   "expected": "(#Light).light_movetorgb(255|0|0)"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "(#Oven).oven_setcookingparameters(\"bake\"|30)",
+   "expected": "(#Oven).oven_setcookingparameters(\"bake\"|30)"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "temp = 23.0\n(#AirConditioner).airconditioner_settargettemperature(23.0)",
+   "expected": "temp = 23.0\n(#AirConditioner).airconditioner_settargettemperature(23.0)"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "(#Siren).sirenMode_setSirenMode(\"emergency\")",
+   "expected": "(#Siren).sirenMode_setSirenMode(\"emergency\")"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "(#Speaker).setVolume(30)",
+   "expected": "(#Speaker).setVolume(30)"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "all(all(#Kitchen #Light)).switch_off()",
+   "expected": "all(all(#Kitchen #Light)).switch_off()"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "(#1stFloor #Light).switch_on()",
+   "expected": "(#1stFloor #Light).switch_on()"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "(#Dishwasher).dishwasher_setdishwashermode('dry')",
+   "expected": "(#Dishwasher).dishwasher_setdishwashermode('dry')"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "if ((#RiceCooker).ricecooker_ricecookermode == \"off\") {\n  (#RiceCooker).ricecooker_setricecookermode(\"cooking\")\n}\n(#RiceCooker).ricecooker_addmoretime(30)",
+   "expected": "if ((#RiceCooker).ricecooker_ricecookermode == \"off\") {\n  (#RiceCooker).ricecooker_setricecookermode(\"cooking\")\n}\n(#RiceCooker).ricecooker_addmoretime(30)"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "(#Speaker).setVolume(30)",
+   "expected": "(#Speaker).setVolume(30)"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "(#Television).television_setchannel(7)",
+   "expected": "(#Television).television_setchannel(7)"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "(#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_temperatureWeather)",
+   "expected": "(#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_temperatureWeather)"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "(#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_humidityWeather)",
+   "expected": "(#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_humidityWeather)"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "(#Speaker).mediaPlayback_speak((#AirQualityDetector).dustSensor_fineDustLevel)",
+   "expected": "(#Speaker).mediaPlayback_speak((#AirQualityDetector).dustSensor_fineDustLevel)"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "(#CloudServiceProvider).generateimage(\"cat.png\")",
+   "expected": "(#CloudServiceProvider).generateimage(\"cat.png\")"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "(#Speaker).mediaPlayback_speak((#MenuProvider).menuprovider_todaymenu)",
+   "expected": "(#Speaker).mediaPlayback_speak((#MenuProvider).menuprovider_todaymenu)"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "(#CloudServiceProvider).cloudserviceprovider_chatwithai(\"What is an LLM?\")\n(#Speaker).mediaPlayback_speak((#CloudServiceProvider).cloudserviceprovider_chatwithai(\"What is an LLM?\"))",
+   "expected": "(#CloudServiceProvider).cloudserviceprovider_chatwithai(\"What is an LLM?\")\n(#Speaker).mediaPlayback_speak((#CloudServiceProvider).cloudserviceprovider_chatwithai(\"What is an LLM?\"))"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "(#Light).colorControl_setColor(\"255|255|0\")",
+   "expected": "(#Light).colorControl_setColor(\"255|255|0\")"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "(#Door).doorControl_close()",
+   "expected": "(#Door).doorControl_close()"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode('stop')",
+   "expected": "(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode('stop')"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "(#Speaker).setVolume(100)",
+   "expected": "(#Speaker).setVolume(100)"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "(#Valve).valve_open()",
+   "expected": "(#Valve).valve_open()"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "(#Light).colorControl_setColor(\"255|255|0\")",
+   "expected": "(#Light).colorControl_setColor(\"255|255|0\")"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "(#LivingRoomLight).light_movetobrightness(80)",
+   "expected": "(#LivingRoomLight).light_movetobrightness(80)"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "(#LivingRoomLight).light_movetohue(240)\n(#LivingRoomLight).light_movetosaturation(80)",
+   "expected": "(#LivingRoomLight).light_movetohue(240)\n(#LivingRoomLight).light_movetosaturation(80)"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "all(#DoorLock).doorlock_lock()",
+   "expected": "all(#DoorLock).doorlock_lock()"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "(#BedroomAirPurifier).airpurifier_setairpurifiermode('sleep')",
+   "expected": "(#BedroomAirPurifier).airpurifier_setairpurifiermode('sleep')"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "all(#Safe).safe_lock()",
+   "expected": "all(#Safe).safe_lock()"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "(#Siren).sirenMode_setSirenMode(\"fire\")",
+   "expected": "(#Siren).sirenMode_setSirenMode(\"fire\")"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "all(#BedroomLight).switch_off()",
+   "expected": "all(#BedroomLight).switch_off()"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "all(#Sector2_Blind).windowShade_open()",
+   "expected": "all(#Sector2_Blind).windowShade_open()"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "all(#SectorB_Odd_Safe).safe_lock()",
+   "expected": "all(#SectorB_Odd_Safe).safe_lock()"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "all(#Sector2).switch_off()",
+   "expected": "all(#Sector2).switch_off()"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "all(#Group1_Light_Upper).colorControl_setColor(\"0|0|255\")",
+   "expected": "all(#Group1_Light_Upper).colorControl_setColor(\"0|0|255\")"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "all(#Bedroom_EvenTagged_Blind).windowShade_close()",
+   "expected": "all(#Bedroom_EvenTagged_Blind).windowShade_close()"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "all(#LivingRoom_Light_Odd).light_switch_on()",
+   "expected": "all(#LivingRoom_Light_Odd).light_switch_on()"
+  },
+  {
+   "function": "normalize_receiver_tag_case_in_code",
+   "code": "all(#StorageDoorLock).doorlock_lock()",
+   "expected": "all(#StorageDoorLock).doorlock_lock()"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "any(#Light).Switch_On()",
+   "expected": "any(#Light).Switch_On()"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "(#bedroom #airconditioner).airConditioner_off()",
+   "expected": "(#Bedroom #AirConditioner).airConditioner_off()"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "(#Clock).clock_delay(600000)",
+   "expected": "(#Clock).clock_delay(600000)"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "(#Light).light_movetorgb(255|0|0)",
+   "expected": "(#Light).light_movetorgb(255|0|0)"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "(#Oven).oven_setcookingparameters(\"bake\"|30)",
+   "expected": "(#Oven).oven_setcookingparameters(\"bake\"|30)"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "temp = 23.0\n(#AirConditioner).airconditioner_settargettemperature(23.0)",
+   "expected": "temp = 23.0\n(#AirConditioner).airconditioner_settargettemperature(23.0)"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "(#Siren).sirenMode_setSirenMode(\"emergency\")",
+   "expected": "(#Siren).sirenMode_setSirenMode(\"emergency\")"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "(#Speaker).setVolume(30)",
+   "expected": "(#Speaker).setVolume(30)"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "all(all(#Kitchen #Light)).switch_off()",
+   "expected": "all(all(#Kitchen #Light)).switch_off()"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "(#1stFloor #Light).switch_on()",
+   "expected": "(#1stFloor #Light).switch_on()"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "(#Dishwasher).dishwasher_setdishwashermode('dry')",
+   "expected": "(#Dishwasher).dishwasher_setdishwashermode('dry')"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "if ((#RiceCooker).ricecooker_ricecookermode == \"off\") {\n  (#RiceCooker).ricecooker_setricecookermode(\"cooking\")\n}\n(#RiceCooker).ricecooker_addmoretime(30)",
+   "expected": "if ((#RiceCooker).ricecooker_ricecookermode == \"off\") {\n  (#RiceCooker).ricecooker_setricecookermode(\"cooking\")\n}\n(#RiceCooker).ricecooker_addmoretime(30)"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "(#Speaker).setVolume(30)",
+   "expected": "(#Speaker).setVolume(30)"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "(#Television).television_setchannel(7)",
+   "expected": "(#Television).television_setchannel(7)"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "(#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_temperatureWeather)",
+   "expected": "(#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_temperatureWeather)"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "(#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_humidityWeather)",
+   "expected": "(#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_humidityWeather)"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "(#Speaker).mediaPlayback_speak((#AirQualityDetector).dustSensor_fineDustLevel)",
+   "expected": "(#Speaker).mediaPlayback_speak((#AirQualityDetector).dustSensor_fineDustLevel)"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "(#CloudServiceProvider).generateimage(\"cat.png\")",
+   "expected": "(#CloudServiceProvider).generateimage(\"cat.png\")"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "(#Speaker).mediaPlayback_speak((#MenuProvider).menuprovider_todaymenu)",
+   "expected": "(#Speaker).mediaPlayback_speak((#MenuProvider).menuprovider_todaymenu)"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "(#CloudServiceProvider).cloudserviceprovider_chatwithai(\"What is an LLM?\")\n(#Speaker).mediaPlayback_speak((#CloudServiceProvider).cloudserviceprovider_chatwithai(\"What is an LLM?\"))",
+   "expected": "(#CloudServiceProvider).cloudserviceprovider_chatwithai(\"What is an LLM?\")\n(#Speaker).mediaPlayback_speak((#CloudServiceProvider).cloudserviceprovider_chatwithai(\"What is an LLM?\"))"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "(#Light).colorControl_setColor(\"255|255|0\")",
+   "expected": "(#Light).colorControl_setColor(\"255|255|0\")"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "(#Door).doorControl_close()",
+   "expected": "(#Door).doorControl_close()"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode('stop')",
+   "expected": "(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode('stop')"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "(#Speaker).setVolume(100)",
+   "expected": "(#Speaker).setVolume(100)"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "(#Valve).valve_open()",
+   "expected": "(#Valve).valve_open()"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "(#Light).colorControl_setColor(\"255|255|0\")",
+   "expected": "(#Light).colorControl_setColor(\"255|255|0\")"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "(#LivingRoomLight).light_movetobrightness(80)",
+   "expected": "(#LivingRoomLight).light_movetobrightness(80)"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "(#LivingRoomLight).light_movetohue(240)\n(#LivingRoomLight).light_movetosaturation(80)",
+   "expected": "(#LivingRoomLight).light_movetohue(240)\n(#LivingRoomLight).light_movetosaturation(80)"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "all(#DoorLock).doorlock_lock()",
+   "expected": "all(#DoorLock).doorlock_lock()"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "(#BedroomAirPurifier).airpurifier_setairpurifiermode('sleep')",
+   "expected": "(#BedroomAirPurifier).airpurifier_setairpurifiermode('sleep')"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "all(#Safe).safe_lock()",
+   "expected": "all(#Safe).safe_lock()"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "(#Siren).sirenMode_setSirenMode(\"fire\")",
+   "expected": "(#Siren).sirenMode_setSirenMode(\"fire\")"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "all(#BedroomLight).switch_off()",
+   "expected": "all(#BedroomLight).switch_off()"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "all(#Sector2_Blind).windowShade_open()",
+   "expected": "all(#Sector2_Blind).windowShade_open()"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "all(#SectorB_Odd_Safe).safe_lock()",
+   "expected": "all(#SectorB_Odd_Safe).safe_lock()"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "all(#Sector2).switch_off()",
+   "expected": "all(#Sector2).switch_off()"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "all(#Group1_Light_Upper).colorControl_setColor(\"0|0|255\")",
+   "expected": "all(#Group1_Light_Upper).colorControl_setColor(\"0|0|255\")"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "all(#Bedroom_EvenTagged_Blind).windowShade_close()",
+   "expected": "all(#Bedroom_EvenTagged_Blind).windowShade_close()"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "all(#LivingRoom_Light_Odd).light_switch_on()",
+   "expected": "all(#LivingRoom_Light_Odd).light_switch_on()"
+  },
+  {
+   "function": "normalize_receiver_tag_order_in_code",
+   "code": "all(#StorageDoorLock).doorlock_lock()",
+   "expected": "all(#StorageDoorLock).doorlock_lock()"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "any(#Light).Switch_On()",
+   "expected": "any(#Light).switch_on()"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "(#bedroom #airconditioner).airConditioner_off()",
+   "expected": "(#bedroom #airconditioner).airconditioner_off()"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "(#Clock).clock_delay(600000)",
+   "expected": "(#Clock).clock_delay(600000)"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "(#Light).light_movetorgb(255|0|0)",
+   "expected": "(#Light).light_movetorgb(255|0|0)"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "(#Oven).oven_setcookingparameters(\"bake\"|30)",
+   "expected": "(#Oven).oven_setcookingparameters(\"bake\"|30)"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "temp = 23.0\n(#AirConditioner).airconditioner_settargettemperature(23.0)",
+   "expected": "temp = 23.0\n(#AirConditioner).airconditioner_settargettemperature(23.0)"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "(#Siren).sirenMode_setSirenMode(\"emergency\")",
+   "expected": "(#Siren).siren_setsirenmode(\"emergency\")"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "(#Speaker).setVolume(30)",
+   "expected": "(#Speaker).speaker_setvolume(30)"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "all(all(#Kitchen #Light)).switch_off()",
+   "expected": "all(all(#Kitchen #Light)).switch_off()"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "(#1stFloor #Light).switch_on()",
+   "expected": "(#1stFloor #Light).switch_on()"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "(#Dishwasher).dishwasher_setdishwashermode('dry')",
+   "expected": "(#Dishwasher).dishwasher_setdishwashermode('dry')"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "if ((#RiceCooker).ricecooker_ricecookermode == \"off\") {\n  (#RiceCooker).ricecooker_setricecookermode(\"cooking\")\n}\n(#RiceCooker).ricecooker_addmoretime(30)",
+   "expected": "if ((#RiceCooker).ricecooker_ricecookermode == \"off\") {\n  (#RiceCooker).ricecooker_setricecookermode(\"cooking\")\n}\n(#RiceCooker).ricecooker_addmoretime(30)"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "(#Speaker).setVolume(30)",
+   "expected": "(#Speaker).speaker_setvolume(30)"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "(#Television).television_setchannel(7)",
+   "expected": "(#Television).television_setchannel(7)"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "(#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_temperatureWeather)",
+   "expected": "(#Speaker).speaker_speak((#WeatherProvider).weatherprovider_temperatureweather)"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "(#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_humidityWeather)",
+   "expected": "(#Speaker).speaker_speak((#WeatherProvider).weatherprovider_humidityweather)"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "(#Speaker).mediaPlayback_speak((#AirQualityDetector).dustSensor_fineDustLevel)",
+   "expected": "(#Speaker).speaker_speak((#AirQualityDetector).dustsensor_finedustlevel)"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "(#CloudServiceProvider).generateimage(\"cat.png\")",
+   "expected": "(#CloudServiceProvider).cloudserviceprovider_generateimage(\"cat.png\")"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "(#Speaker).mediaPlayback_speak((#MenuProvider).menuprovider_todaymenu)",
+   "expected": "(#Speaker).speaker_speak((#MenuProvider).menuprovider_todaymenu)"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "(#CloudServiceProvider).cloudserviceprovider_chatwithai(\"What is an LLM?\")\n(#Speaker).mediaPlayback_speak((#CloudServiceProvider).cloudserviceprovider_chatwithai(\"What is an LLM?\"))",
+   "expected": "(#CloudServiceProvider).cloudserviceprovider_chatwithai(\"What is an LLM?\")\n(#Speaker).speaker_speak((#CloudServiceProvider).cloudserviceprovider_chatwithai(\"What is an LLM?\"))"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "(#Light).colorControl_setColor(\"255|255|0\")",
+   "expected": "(#Light).colorcontrol_setcolor(\"255|255|0\")"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "(#Door).doorControl_close()",
+   "expected": "(#Door).door_close()"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode('stop')",
+   "expected": "(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode('stop')"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "(#Speaker).setVolume(100)",
+   "expected": "(#Speaker).speaker_setvolume(100)"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "(#Valve).valve_open()",
+   "expected": "(#Valve).valve_open()"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "(#Light).colorControl_setColor(\"255|255|0\")",
+   "expected": "(#Light).colorcontrol_setcolor(\"255|255|0\")"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "(#LivingRoomLight).light_movetobrightness(80)",
+   "expected": "(#LivingRoomLight).light_movetobrightness(80)"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "(#LivingRoomLight).light_movetohue(240)\n(#LivingRoomLight).light_movetosaturation(80)",
+   "expected": "(#LivingRoomLight).light_movetohue(240)\n(#LivingRoomLight).light_movetosaturation(80)"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "all(#DoorLock).doorlock_lock()",
+   "expected": "all(#DoorLock).doorlock_lock()"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "(#BedroomAirPurifier).airpurifier_setairpurifiermode('sleep')",
+   "expected": "(#BedroomAirPurifier).airpurifier_setairpurifiermode('sleep')"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "all(#Safe).safe_lock()",
+   "expected": "all(#Safe).safe_lock()"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "(#Siren).sirenMode_setSirenMode(\"fire\")",
+   "expected": "(#Siren).siren_setsirenmode(\"fire\")"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "all(#BedroomLight).switch_off()",
+   "expected": "all(#BedroomLight).switch_off()"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "all(#Sector2_Blind).windowShade_open()",
+   "expected": "all(#Sector2_Blind).windowshade_open()"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "all(#SectorB_Odd_Safe).safe_lock()",
+   "expected": "all(#SectorB_Odd_Safe).safe_lock()"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "all(#Sector2).switch_off()",
+   "expected": "all(#Sector2).switch_off()"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "all(#Group1_Light_Upper).colorControl_setColor(\"0|0|255\")",
+   "expected": "all(#Group1_Light_Upper).colorcontrol_setcolor(\"0|0|255\")"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "all(#Bedroom_EvenTagged_Blind).windowShade_close()",
+   "expected": "all(#Bedroom_EvenTagged_Blind).windowshade_close()"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "all(#LivingRoom_Light_Odd).light_switch_on()",
+   "expected": "all(#LivingRoom_Light_Odd).light_switch_on()"
+  },
+  {
+   "function": "canonicalize_member_aliases_in_code",
+   "code": "all(#StorageDoorLock).doorlock_lock()",
+   "expected": "all(#StorageDoorLock).doorlock_lock()"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "any(#Light).Switch_On()",
+   "expected": "any(#Light).Switch_On()"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "(#bedroom #airconditioner).airConditioner_off()",
+   "expected": "(#bedroom #airconditioner).airConditioner_off()"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "(#Clock).clock_delay(600000)",
+   "expected": "delay(10 MIN)"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "(#Light).light_movetorgb(255|0|0)",
+   "expected": "(#Light).light_movetorgb(255|0|0)"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "(#Oven).oven_setcookingparameters(\"bake\"|30)",
+   "expected": "(#Oven).oven_setcookingparameters(\"bake\"|30)"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "temp = 23.0\n(#AirConditioner).airconditioner_settargettemperature(23.0)",
+   "expected": "temp = 23.0\n(#AirConditioner).airconditioner_settargettemperature(23.0)"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "(#Siren).sirenMode_setSirenMode(\"emergency\")",
+   "expected": "(#Siren).sirenMode_setSirenMode(\"emergency\")"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "(#Speaker).setVolume(30)",
+   "expected": "(#Speaker).setVolume(30)"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "all(all(#Kitchen #Light)).switch_off()",
+   "expected": "all(all(#Kitchen #Light)).switch_off()"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "(#1stFloor #Light).switch_on()",
+   "expected": "(#1stFloor #Light).switch_on()"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "(#Dishwasher).dishwasher_setdishwashermode('dry')",
+   "expected": "(#Dishwasher).dishwasher_setdishwashermode('dry')"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "if ((#RiceCooker).ricecooker_ricecookermode == \"off\") {\n  (#RiceCooker).ricecooker_setricecookermode(\"cooking\")\n}\n(#RiceCooker).ricecooker_addmoretime(30)",
+   "expected": "if ((#RiceCooker).ricecooker_ricecookermode == \"off\") {\n  (#RiceCooker).ricecooker_setricecookermode(\"cooking\")\n}\n(#RiceCooker).ricecooker_addmoretime(30)"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "(#Speaker).setVolume(30)",
+   "expected": "(#Speaker).setVolume(30)"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "(#Television).television_setchannel(7)",
+   "expected": "(#Television).television_setchannel(7)"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "(#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_temperatureWeather)",
+   "expected": "(#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_temperatureWeather)"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "(#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_humidityWeather)",
+   "expected": "(#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_humidityWeather)"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "(#Speaker).mediaPlayback_speak((#AirQualityDetector).dustSensor_fineDustLevel)",
+   "expected": "(#Speaker).mediaPlayback_speak((#AirQualityDetector).dustSensor_fineDustLevel)"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "(#CloudServiceProvider).generateimage(\"cat.png\")",
+   "expected": "(#CloudServiceProvider).generateimage(\"cat.png\")"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "(#Speaker).mediaPlayback_speak((#MenuProvider).menuprovider_todaymenu)",
+   "expected": "(#Speaker).mediaPlayback_speak((#MenuProvider).menuprovider_todaymenu)"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "(#CloudServiceProvider).cloudserviceprovider_chatwithai(\"What is an LLM?\")\n(#Speaker).mediaPlayback_speak((#CloudServiceProvider).cloudserviceprovider_chatwithai(\"What is an LLM?\"))",
+   "expected": "(#CloudServiceProvider).cloudserviceprovider_chatwithai(\"What is an LLM?\")\n(#Speaker).mediaPlayback_speak((#CloudServiceProvider).cloudserviceprovider_chatwithai(\"What is an LLM?\"))"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "(#Light).colorControl_setColor(\"255|255|0\")",
+   "expected": "(#Light).colorControl_setColor(\"255|255|0\")"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "(#Door).doorControl_close()",
+   "expected": "(#Door).doorControl_close()"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode('stop')",
+   "expected": "(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode('stop')"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "(#Speaker).setVolume(100)",
+   "expected": "(#Speaker).setVolume(100)"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "(#Valve).valve_open()",
+   "expected": "(#Valve).valve_open()"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "(#Light).colorControl_setColor(\"255|255|0\")",
+   "expected": "(#Light).colorControl_setColor(\"255|255|0\")"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "(#LivingRoomLight).light_movetobrightness(80)",
+   "expected": "(#LivingRoomLight).light_movetobrightness(80)"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "(#LivingRoomLight).light_movetohue(240)\n(#LivingRoomLight).light_movetosaturation(80)",
+   "expected": "(#LivingRoomLight).light_movetohue(240)\n(#LivingRoomLight).light_movetosaturation(80)"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "all(#DoorLock).doorlock_lock()",
+   "expected": "all(#DoorLock).doorlock_lock()"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "(#BedroomAirPurifier).airpurifier_setairpurifiermode('sleep')",
+   "expected": "(#BedroomAirPurifier).airpurifier_setairpurifiermode('sleep')"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "all(#Safe).safe_lock()",
+   "expected": "all(#Safe).safe_lock()"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "(#Siren).sirenMode_setSirenMode(\"fire\")",
+   "expected": "(#Siren).sirenMode_setSirenMode(\"fire\")"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "all(#BedroomLight).switch_off()",
+   "expected": "all(#BedroomLight).switch_off()"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "all(#Sector2_Blind).windowShade_open()",
+   "expected": "all(#Sector2_Blind).windowShade_open()"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "all(#SectorB_Odd_Safe).safe_lock()",
+   "expected": "all(#SectorB_Odd_Safe).safe_lock()"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "all(#Sector2).switch_off()",
+   "expected": "all(#Sector2).switch_off()"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "all(#Group1_Light_Upper).colorControl_setColor(\"0|0|255\")",
+   "expected": "all(#Group1_Light_Upper).colorControl_setColor(\"0|0|255\")"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "all(#Bedroom_EvenTagged_Blind).windowShade_close()",
+   "expected": "all(#Bedroom_EvenTagged_Blind).windowShade_close()"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "all(#LivingRoom_Light_Odd).light_switch_on()",
+   "expected": "all(#LivingRoom_Light_Odd).light_switch_on()"
+  },
+  {
+   "function": "normalize_clock_delay_calls_in_code",
+   "code": "all(#StorageDoorLock).doorlock_lock()",
+   "expected": "all(#StorageDoorLock).doorlock_lock()"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "any(#Light).Switch_On()",
+   "expected": "any(#Light).Switch_On()"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "(#bedroom #airconditioner).airConditioner_off()",
+   "expected": "(#bedroom #airconditioner).airConditioner_off()"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "(#Clock).clock_delay(600000)",
+   "expected": "(#Clock).clock_delay(600000)"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "(#Light).light_movetorgb(255|0|0)",
+   "expected": "(#Light).light_movetorgb(255, 0, 0)"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "(#Oven).oven_setcookingparameters(\"bake\"|30)",
+   "expected": "(#Oven).oven_setcookingparameters(\"bake\", 30)"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "temp = 23.0\n(#AirConditioner).airconditioner_settargettemperature(23.0)",
+   "expected": "temp = 23.0\n(#AirConditioner).airconditioner_settargettemperature(23.0)"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "(#Siren).sirenMode_setSirenMode(\"emergency\")",
+   "expected": "(#Siren).sirenMode_setSirenMode(\"emergency\")"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "(#Speaker).setVolume(30)",
+   "expected": "(#Speaker).setVolume(30)"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "all(all(#Kitchen #Light)).switch_off()",
+   "expected": "all(all(#Kitchen #Light)).switch_off()"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "(#1stFloor #Light).switch_on()",
+   "expected": "(#1stFloor #Light).switch_on()"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "(#Dishwasher).dishwasher_setdishwashermode('dry')",
+   "expected": "(#Dishwasher).dishwasher_setdishwashermode('dry')"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "if ((#RiceCooker).ricecooker_ricecookermode == \"off\") {\n  (#RiceCooker).ricecooker_setricecookermode(\"cooking\")\n}\n(#RiceCooker).ricecooker_addmoretime(30)",
+   "expected": "if ((#RiceCooker).ricecooker_ricecookermode == \"off\") {\n  (#RiceCooker).ricecooker_setricecookermode(\"cooking\")\n}\n(#RiceCooker).ricecooker_addmoretime(30)"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "(#Speaker).setVolume(30)",
+   "expected": "(#Speaker).setVolume(30)"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "(#Television).television_setchannel(7)",
+   "expected": "(#Television).television_setchannel(7)"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "(#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_temperatureWeather)",
+   "expected": "(#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_temperatureWeather)"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "(#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_humidityWeather)",
+   "expected": "(#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_humidityWeather)"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "(#Speaker).mediaPlayback_speak((#AirQualityDetector).dustSensor_fineDustLevel)",
+   "expected": "(#Speaker).mediaPlayback_speak((#AirQualityDetector).dustSensor_fineDustLevel)"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "(#CloudServiceProvider).generateimage(\"cat.png\")",
+   "expected": "(#CloudServiceProvider).generateimage(\"cat.png\")"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "(#Speaker).mediaPlayback_speak((#MenuProvider).menuprovider_todaymenu)",
+   "expected": "(#Speaker).mediaPlayback_speak((#MenuProvider).menuprovider_todaymenu)"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "(#CloudServiceProvider).cloudserviceprovider_chatwithai(\"What is an LLM?\")\n(#Speaker).mediaPlayback_speak((#CloudServiceProvider).cloudserviceprovider_chatwithai(\"What is an LLM?\"))",
+   "expected": "(#CloudServiceProvider).cloudserviceprovider_chatwithai(\"What is an LLM?\")\n(#Speaker).mediaPlayback_speak((#CloudServiceProvider).cloudserviceprovider_chatwithai(\"What is an LLM?\"))"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "(#Light).colorControl_setColor(\"255|255|0\")",
+   "expected": "(#Light).colorControl_setColor(\"255,255,0\")"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "(#Door).doorControl_close()",
+   "expected": "(#Door).doorControl_close()"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode('stop')",
+   "expected": "(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode('stop')"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "(#Speaker).setVolume(100)",
+   "expected": "(#Speaker).setVolume(100)"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "(#Valve).valve_open()",
+   "expected": "(#Valve).valve_open()"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "(#Light).colorControl_setColor(\"255|255|0\")",
+   "expected": "(#Light).colorControl_setColor(\"255,255,0\")"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "(#LivingRoomLight).light_movetobrightness(80)",
+   "expected": "(#LivingRoomLight).light_movetobrightness(80)"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "(#LivingRoomLight).light_movetohue(240)\n(#LivingRoomLight).light_movetosaturation(80)",
+   "expected": "(#LivingRoomLight).light_movetohue(240)\n(#LivingRoomLight).light_movetosaturation(80)"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "all(#DoorLock).doorlock_lock()",
+   "expected": "all(#DoorLock).doorlock_lock()"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "(#BedroomAirPurifier).airpurifier_setairpurifiermode('sleep')",
+   "expected": "(#BedroomAirPurifier).airpurifier_setairpurifiermode('sleep')"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "all(#Safe).safe_lock()",
+   "expected": "all(#Safe).safe_lock()"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "(#Siren).sirenMode_setSirenMode(\"fire\")",
+   "expected": "(#Siren).sirenMode_setSirenMode(\"fire\")"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "all(#BedroomLight).switch_off()",
+   "expected": "all(#BedroomLight).switch_off()"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "all(#Sector2_Blind).windowShade_open()",
+   "expected": "all(#Sector2_Blind).windowShade_open()"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "all(#SectorB_Odd_Safe).safe_lock()",
+   "expected": "all(#SectorB_Odd_Safe).safe_lock()"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "all(#Sector2).switch_off()",
+   "expected": "all(#Sector2).switch_off()"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "all(#Group1_Light_Upper).colorControl_setColor(\"0|0|255\")",
+   "expected": "all(#Group1_Light_Upper).colorControl_setColor(\"0,0,255\")"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "all(#Bedroom_EvenTagged_Blind).windowShade_close()",
+   "expected": "all(#Bedroom_EvenTagged_Blind).windowShade_close()"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "all(#LivingRoom_Light_Odd).light_switch_on()",
+   "expected": "all(#LivingRoom_Light_Odd).light_switch_on()"
+  },
+  {
+   "function": "normalize_function_argument_separators_in_code",
+   "code": "all(#StorageDoorLock).doorlock_lock()",
+   "expected": "all(#StorageDoorLock).doorlock_lock()"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "any(#Light).Switch_On()",
+   "expected": "any(#Light).Switch_On()"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "(#bedroom #airconditioner).airConditioner_off()",
+   "expected": "(#bedroom #airconditioner).airConditioner_off()"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "(#Clock).clock_delay(600000)",
+   "expected": "(#Clock).clock_delay(600000)"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "(#Light).light_movetorgb(255|0|0)",
+   "expected": "(#Light).light_movetorgb(255|0|0)"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "(#Oven).oven_setcookingparameters(\"bake\"|30)",
+   "expected": "(#Oven).oven_setcookingparameters(\"bake\"|30)"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "temp = 23.0\n(#AirConditioner).airconditioner_settargettemperature(23.0)",
+   "expected": "temp = 23\n(#AirConditioner).airconditioner_settargettemperature(23)"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "(#Siren).sirenMode_setSirenMode(\"emergency\")",
+   "expected": "(#Siren).sirenMode_setSirenMode(\"emergency\")"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "(#Speaker).setVolume(30)",
+   "expected": "(#Speaker).setVolume(30)"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "all(all(#Kitchen #Light)).switch_off()",
+   "expected": "all(all(#Kitchen #Light)).switch_off()"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "(#1stFloor #Light).switch_on()",
+   "expected": "(#1stFloor #Light).switch_on()"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "(#Dishwasher).dishwasher_setdishwashermode('dry')",
+   "expected": "(#Dishwasher).dishwasher_setdishwashermode('dry')"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "if ((#RiceCooker).ricecooker_ricecookermode == \"off\") {\n  (#RiceCooker).ricecooker_setricecookermode(\"cooking\")\n}\n(#RiceCooker).ricecooker_addmoretime(30)",
+   "expected": "if ((#RiceCooker).ricecooker_ricecookermode == \"off\") {\n  (#RiceCooker).ricecooker_setricecookermode(\"cooking\")\n}\n(#RiceCooker).ricecooker_addmoretime(30)"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "(#Speaker).setVolume(30)",
+   "expected": "(#Speaker).setVolume(30)"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "(#Television).television_setchannel(7)",
+   "expected": "(#Television).television_setchannel(7)"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "(#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_temperatureWeather)",
+   "expected": "(#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_temperatureWeather)"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "(#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_humidityWeather)",
+   "expected": "(#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_humidityWeather)"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "(#Speaker).mediaPlayback_speak((#AirQualityDetector).dustSensor_fineDustLevel)",
+   "expected": "(#Speaker).mediaPlayback_speak((#AirQualityDetector).dustSensor_fineDustLevel)"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "(#CloudServiceProvider).generateimage(\"cat.png\")",
+   "expected": "(#CloudServiceProvider).generateimage(\"cat.png\")"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "(#Speaker).mediaPlayback_speak((#MenuProvider).menuprovider_todaymenu)",
+   "expected": "(#Speaker).mediaPlayback_speak((#MenuProvider).menuprovider_todaymenu)"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "(#CloudServiceProvider).cloudserviceprovider_chatwithai(\"What is an LLM?\")\n(#Speaker).mediaPlayback_speak((#CloudServiceProvider).cloudserviceprovider_chatwithai(\"What is an LLM?\"))",
+   "expected": "(#CloudServiceProvider).cloudserviceprovider_chatwithai(\"What is an LLM?\")\n(#Speaker).mediaPlayback_speak((#CloudServiceProvider).cloudserviceprovider_chatwithai(\"What is an LLM?\"))"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "(#Light).colorControl_setColor(\"255|255|0\")",
+   "expected": "(#Light).colorControl_setColor(\"255|255|0\")"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "(#Door).doorControl_close()",
+   "expected": "(#Door).doorControl_close()"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode('stop')",
+   "expected": "(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode('stop')"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "(#Speaker).setVolume(100)",
+   "expected": "(#Speaker).setVolume(100)"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "(#Valve).valve_open()",
+   "expected": "(#Valve).valve_open()"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "(#Light).colorControl_setColor(\"255|255|0\")",
+   "expected": "(#Light).colorControl_setColor(\"255|255|0\")"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "(#LivingRoomLight).light_movetobrightness(80)",
+   "expected": "(#LivingRoomLight).light_movetobrightness(80)"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "(#LivingRoomLight).light_movetohue(240)\n(#LivingRoomLight).light_movetosaturation(80)",
+   "expected": "(#LivingRoomLight).light_movetohue(240)\n(#LivingRoomLight).light_movetosaturation(80)"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "all(#DoorLock).doorlock_lock()",
+   "expected": "all(#DoorLock).doorlock_lock()"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "(#BedroomAirPurifier).airpurifier_setairpurifiermode('sleep')",
+   "expected": "(#BedroomAirPurifier).airpurifier_setairpurifiermode('sleep')"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "all(#Safe).safe_lock()",
+   "expected": "all(#Safe).safe_lock()"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "(#Siren).sirenMode_setSirenMode(\"fire\")",
+   "expected": "(#Siren).sirenMode_setSirenMode(\"fire\")"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "all(#BedroomLight).switch_off()",
+   "expected": "all(#BedroomLight).switch_off()"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "all(#Sector2_Blind).windowShade_open()",
+   "expected": "all(#Sector2_Blind).windowShade_open()"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "all(#SectorB_Odd_Safe).safe_lock()",
+   "expected": "all(#SectorB_Odd_Safe).safe_lock()"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "all(#Sector2).switch_off()",
+   "expected": "all(#Sector2).switch_off()"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "all(#Group1_Light_Upper).colorControl_setColor(\"0|0|255\")",
+   "expected": "all(#Group1_Light_Upper).colorControl_setColor(\"0|0|255\")"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "all(#Bedroom_EvenTagged_Blind).windowShade_close()",
+   "expected": "all(#Bedroom_EvenTagged_Blind).windowShade_close()"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "all(#LivingRoom_Light_Odd).light_switch_on()",
+   "expected": "all(#LivingRoom_Light_Odd).light_switch_on()"
+  },
+  {
+   "function": "normalize_integer_like_numeric_literals_in_code",
+   "code": "all(#StorageDoorLock).doorlock_lock()",
+   "expected": "all(#StorageDoorLock).doorlock_lock()"
+  }
+ ],
+ "validation": [
+  {
+   "row_no": 1,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"DishwasherDryMode\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Dishwasher).dishwasher_setdishwashermode('dry')\"\n}",
+   "connected_devices": "",
+   "expected_failure_reasons": [
+    "arg_type"
+   ],
+   "expected_service_match": 1.0,
+   "expected_arg_type_ok": 0.5
+  },
+  {
+   "row_no": 3,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"RiceCookerCooking\",\n  \"cron\": \"\",\n  \"period\": 1800000,\n  \"code\": \"if ((#RiceCooker).ricecooker_ricecookermode == \\\"off\\\") {\\n  (#RiceCooker).ricecooker_setricecookermode(\\\"cooking\\\")\\n}\\n(#RiceCooker).ricecooker_addmoretime(30)\"\n}",
+   "connected_devices": "",
+   "expected_failure_reasons": [],
+   "expected_service_match": 1.0,
+   "expected_arg_type_ok": 1.0
+  },
+  {
+   "row_no": 5,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"SetSpeakerVolume\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Speaker).setVolume(30)\"\n}",
+   "connected_devices": "",
+   "expected_failure_reasons": [],
+   "expected_service_match": 1.0,
+   "expected_arg_type_ok": 1.0
+  },
+  {
+   "row_no": 7,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"SwitchTVChannel\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Television).television_setchannel(7)\"\n}",
+   "connected_devices": "",
+   "expected_failure_reasons": [],
+   "expected_service_match": 1.0,
+   "expected_arg_type_ok": 1.0
+  },
+  {
+   "row_no": 9,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"TellOutdoorTemp\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_temperatureWeather)\"\n}",
+   "connected_devices": "",
+   "expected_failure_reasons": [
+    "service_match",
+    "unknown_service:mediaPlayback_speak"
+   ],
+   "expected_service_match": 0.5,
+   "expected_arg_type_ok": 1.0
+  },
+  {
+   "row_no": 11,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"TellOutdoorHumidity\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_humidityWeather)\"\n}",
+   "connected_devices": "",
+   "expected_failure_reasons": [
+    "service_match",
+    "unknown_service:mediaPlayback_speak"
+   ],
+   "expected_service_match": 0.5,
+   "expected_arg_type_ok": 1.0
+  },
+  {
+   "row_no": 13,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"AnnounceFineDustLevel\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Speaker).mediaPlayback_speak((#AirQualityDetector).dustSensor_fineDustLevel)\"\n}",
+   "connected_devices": "",
+   "expected_failure_reasons": [
+    "service_match",
+    "unknown_service:dustSensor_fineDustLevel",
+    "unknown_service:mediaPlayback_speak"
+   ],
+   "expected_service_match": 0.0,
+   "expected_arg_type_ok": 1.0
+  },
+  {
+   "row_no": 15,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"GenerateCatImage\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#CloudServiceProvider).generateimage(\\\"cat.png\\\")\"\n}",
+   "connected_devices": "",
+   "expected_failure_reasons": [],
+   "expected_service_match": 1.0,
+   "expected_arg_type_ok": 1.0
+  },
+  {
+   "row_no": 17,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"TellTodayMenu\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Speaker).mediaPlayback_speak((#MenuProvider).menuprovider_todaymenu)\"\n}",
+   "connected_devices": "",
+   "expected_failure_reasons": [
+    "service_match",
+    "unknown_service:mediaPlayback_speak"
+   ],
+   "expected_service_match": 0.5,
+   "expected_arg_type_ok": 1.0
+  },
+  {
+   "row_no": 19,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"AskCloudAIAboutLLM\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#CloudServiceProvider).cloudserviceprovider_chatwithai(\\\"What is an LLM?\\\")\\n(#Speaker).mediaPlayback_speak((#CloudServiceProvider).cloudserviceprovider_chatwithai(\\\"What is an LLM?\\\"))\"\n}",
+   "connected_devices": "",
+   "expected_failure_reasons": [
+    "service_match",
+    "unknown_service:mediaPlayback_speak"
+   ],
+   "expected_service_match": 0.666667,
+   "expected_arg_type_ok": 1.0
+  },
+  {
+   "row_no": 21,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"ChangeLightColorToYellow\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Light).colorControl_setColor(\\\"255|255|0\\\")\"\n}",
+   "connected_devices": "",
+   "expected_failure_reasons": [],
+   "expected_service_match": 1.0,
+   "expected_arg_type_ok": 1.0
+  },
+  {
+   "row_no": 23,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"CloseDoor\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Door).doorControl_close()\"\n}",
+   "connected_devices": "",
+   "expected_failure_reasons": [
+    "arg_type",
+    "service_match",
+    "unknown_service:doorControl_close"
+   ],
+   "expected_service_match": 0.0,
+   "expected_arg_type_ok": 0.0
+  },
+  {
+   "row_no": 25,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"StopRobotVacuum\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode('stop')\"\n}",
+   "connected_devices": "",
+   "expected_failure_reasons": [
+    "arg_type"
+   ],
+   "expected_service_match": 1.0,
+   "expected_arg_type_ok": 0.5
+  },
+  {
+   "row_no": 27,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"SetMaxVolume\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Speaker).setVolume(100)\"\n}",
+   "connected_devices": "",
+   "expected_failure_reasons": [],
+   "expected_service_match": 1.0,
+   "expected_arg_type_ok": 1.0
+  },
+  {
+   "row_no": 29,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"ValveOpen\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Valve).valve_open()\"\n}",
+   "connected_devices": "",
+   "expected_failure_reasons": [],
+   "expected_service_match": 1.0,
+   "expected_arg_type_ok": 1.0
+  },
+  {
+   "row_no": 31,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"LivingRoomLightYellow\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Light).colorControl_setColor(\\\"255|255|0\\\")\"\n}",
+   "connected_devices": "{'LivingRoom_Light': {'category': ['Light', 'ColorControl'], 'tags': ['LivingRoom', 'Light', 'ColorControl']}, 'Kitchen_Light': {'category': ['Light', 'ColorControl'], 'tags': ['Kitchen', 'Light', 'ColorControl']}}",
+   "expected_failure_reasons": [],
+   "expected_service_match": 1.0,
+   "expected_arg_type_ok": 1.0
+  },
+  {
+   "row_no": 33,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"LivingRoomLightBrightness\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#LivingRoomLight).light_movetobrightness(80)\"\n}",
+   "connected_devices": "{'LivingRoom_Light': {'category': 'Light', 'tags': ['LivingRoom', 'Light']}, 'Bedroom_Light': {'category': 'Light', 'tags': ['Bedroom', 'Light']}}",
+   "expected_failure_reasons": [
+    "arg_type"
+   ],
+   "expected_service_match": 1.0,
+   "expected_arg_type_ok": 0.5
+  },
+  {
+   "row_no": 35,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"LivingRoomLightColorSet\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#LivingRoomLight).light_movetohue(240)\\n(#LivingRoomLight).light_movetosaturation(80)\"\n}",
+   "connected_devices": "{'LivingRoom_Light': {'category': 'Light', 'tags': ['LivingRoom', 'Light']}, 'Kitchen_Light': {'category': 'Light', 'tags': ['Kitchen', 'Light']}}",
+   "expected_failure_reasons": [],
+   "expected_service_match": 1.0,
+   "expected_arg_type_ok": 1.0
+  },
+  {
+   "row_no": 37,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"LockAllDoorLocks\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"all(#DoorLock).doorlock_lock()\"\n}",
+   "connected_devices": "{'FrontDoor_Lock': {'category': 'DoorLock', 'tags': ['Front', 'DoorLock']}, 'BackDoor_Lock': {'category': 'DoorLock', 'tags': ['Back', 'DoorLock']}}",
+   "expected_failure_reasons": [],
+   "expected_service_match": 1.0,
+   "expected_arg_type_ok": 1.0
+  },
+  {
+   "row_no": 39,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"ChangeAirPurifierMode\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#BedroomAirPurifier).airpurifier_setairpurifiermode('sleep')\"\n}",
+   "connected_devices": "{'Bedroom_AP': {'category': 'AirPurifier', 'tags': ['Bedroom', 'AirPurifier']}, 'LivingRoom_AP': {'category': 'AirPurifier', 'tags': ['LivingRoom', 'AirPurifier']}}",
+   "expected_failure_reasons": [
+    "arg_type"
+   ],
+   "expected_service_match": 1.0,
+   "expected_arg_type_ok": 0.5
+  },
+  {
+   "row_no": 41,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"OpenAllSafes\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"all(#Safe).safe_lock()\"\n}",
+   "connected_devices": "{'Office_Safe': {'category': 'Safe', 'tags': ['Office', 'Safe']}, 'Bedroom_Safe': {'category': 'Safe', 'tags': ['Bedroom', 'Safe']}}",
+   "expected_failure_reasons": [],
+   "expected_service_match": 1.0,
+   "expected_arg_type_ok": 1.0
+  },
+  {
+   "row_no": 43,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"FireSirenAlert\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Siren).sirenMode_setSirenMode(\\\"fire\\\")\"\n}",
+   "connected_devices": "{'Farm_Siren': {'category': 'Siren', 'tags': ['Farm', 'Siren']}, 'House_Siren': {'category': 'Siren', 'tags': ['House', 'Siren']}}",
+   "expected_failure_reasons": [
+    "arg_type",
+    "service_match",
+    "unknown_service:sirenMode_setSirenMode"
+   ],
+   "expected_service_match": 0.0,
+   "expected_arg_type_ok": 0.0
+  },
+  {
+   "row_no": 45,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"TurnOffBedroomLights\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"all(#BedroomLight).switch_off()\"\n}",
+   "connected_devices": "{'Bedroom_Light': {'category': ['Light', 'Switch'], 'tags': ['Bedroom', 'Light', 'Switch']}, 'Kitchen_Light': {'category': ['Light', 'Switch'], 'tags': ['Kitchen', 'Light', 'Switch']}}",
+   "expected_failure_reasons": [],
+   "expected_service_match": 1.0,
+   "expected_arg_type_ok": 1.0
+  },
+  {
+   "row_no": 47,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"OpenAllBlindsInSector2\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"all(#Sector2_Blind).windowShade_open()\"\n}",
+   "connected_devices": "{'S2_Blind_1': {'category': ['WindowCovering'], 'tags': ['Sector2', 'Blind', 'WindowCovering']}, 'S2_Blind_2': {'category': ['WindowCovering'], 'tags': ['Sector2', 'Blind', 'WindowCovering']}, 'S1_Blind': {'category': ['WindowCovering'], 'tags': ['Sector1', 'Blind', 'WindowCovering']}}",
+   "expected_failure_reasons": [
+    "arg_type",
+    "service_match",
+    "unknown_service:windowShade_open"
+   ],
+   "expected_service_match": 0.0,
+   "expected_arg_type_ok": 0.0
+  },
+  {
+   "row_no": 49,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"LockAllSafesInSectorB\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"all(#SectorB_Odd_Safe).safe_lock()\"\n}",
+   "connected_devices": "{'SB_Safe_1': {'category': ['Safe'], 'tags': ['SectorB', 'Odd', 'Safe']}, 'SB_Safe_2': {'category': ['Safe'], 'tags': ['SectorB', 'Even', 'Safe']}, 'SA_Safe_3': {'category': ['Safe'], 'tags': ['SectorA', 'Odd', 'Safe']}}",
+   "expected_failure_reasons": [],
+   "expected_service_match": 1.0,
+   "expected_arg_type_ok": 1.0
+  },
+  {
+   "row_no": 51,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"CloseEverythingInSector2\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"all(#Sector2).switch_off()\"\n}",
+   "connected_devices": "{'S2_Window': {'category': ['WindowCovering'], 'tags': ['Sector2', 'Window', 'WindowCovering']}, 'S2_Blind': {'category': ['WindowCovering'], 'tags': ['Sector2', 'Blind', 'WindowCovering']}, 'S1_Window': {'category': ['WindowCovering'], 'tags': ['Sector1', 'Window', 'WindowCovering']}}",
+   "expected_failure_reasons": [],
+   "expected_service_match": 1.0,
+   "expected_arg_type_ok": 1.0
+  },
+  {
+   "row_no": 53,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"ChangeLightsInGroup1\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"all(#Group1_Light_Upper).colorControl_setColor(\\\"0|0|255\\\")\"\n}",
+   "connected_devices": "{'G1_Top_Light_1': {'category': ['Light', 'ColorControl', 'Switch'], 'tags': ['Group1', 'Top', 'Light', 'ColorControl', 'Switch']}, 'G1_Top_Light_2': {'category': ['Light', 'ColorControl', 'Switch'], 'tags': ['Group1', 'Top', 'Light', 'ColorControl', 'Switch']}, 'G1_Bottom_Light': {'category': ['Light', 'ColorControl', 'Switch'], 'tags': ['Group1', 'Bottom', 'Light', 'ColorControl', 'Switch']}, 'G2_Top_Light': {'category': ['Light', 'ColorControl', 'Switch'], 'tags': ['Group2', 'Top', 'Light', 'ColorControl', 'Switch']}}",
+   "expected_failure_reasons": [],
+   "expected_service_match": 1.0,
+   "expected_arg_type_ok": 1.0
+  },
+  {
+   "row_no": 55,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"LowerEvenTaggedBlindsInBedroom\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"all(#Bedroom_EvenTagged_Blind).windowShade_close()\"\n}",
+   "connected_devices": "{'BR_Blind_2': {'category': ['WindowCovering'], 'tags': ['Bedroom', 'Even', 'Blind', 'WindowCovering']}, 'BR_Blind_4': {'category': ['WindowCovering'], 'tags': ['Bedroom', 'Even', 'Blind', 'WindowCovering']}, 'BR_Blind_1': {'category': ['WindowCovering'], 'tags': ['Bedroom', 'Odd', 'Blind', 'WindowCovering']}, 'LR_Blind_2': {'category': ['WindowCovering'], 'tags': ['LivingRoom', 'Even', 'Blind', 'WindowCovering']}}",
+   "expected_failure_reasons": [
+    "arg_type",
+    "service_match",
+    "unknown_service:windowShade_close"
+   ],
+   "expected_service_match": 0.0,
+   "expected_arg_type_ok": 0.0
+  },
+  {
+   "row_no": 57,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"LivingRoomLightsOn\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"all(#LivingRoom_Light_Odd).light_switch_on()\"\n}",
+   "connected_devices": "{'LR_Wall_Light_1': {'category': ['Light', 'Switch'], 'tags': ['LivingRoom', 'Wall', 'Odd', 'Light', 'Switch']}, 'LR_Wall_Light_2': {'category': ['Light', 'Switch'], 'tags': ['LivingRoom', 'Wall', 'Even', 'Light', 'Switch']}, 'Kitchen_Wall_Light_1': {'category': ['Light', 'Switch'], 'tags': ['Kitchen', 'Wall', 'Odd', 'Light', 'Switch']}}",
+   "expected_failure_reasons": [
+    "arg_type",
+    "service_match",
+    "unknown_service:light_switch_on"
+   ],
+   "expected_service_match": 0.0,
+   "expected_arg_type_ok": 0.0
+  },
+  {
+   "row_no": 59,
+   "source": "qwen7b_dt_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"LockAllStorageDoorLocks\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"all(#StorageDoorLock).doorlock_lock()\"\n}",
+   "connected_devices": "{'Stor_Lock_1': {'category': ['DoorLock'], 'tags': ['Storage', 'DoorLock']}, 'Stor_Lock_2': {'category': ['DoorLock'], 'tags': ['Storage', 'DoorLock']}, 'Entrance_Lock': {'category': ['DoorLock'], 'tags': ['Entrance', 'DoorLock']}}",
+   "expected_failure_reasons": [],
+   "expected_service_match": 1.0,
+   "expected_arg_type_ok": 1.0
+  },
+  {
+   "row_no": 2,
+   "source": "gpt41mini_cloudref_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"오븐시간5분추가\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Oven).oven_addmoretime(5)\"\n}",
+   "connected_devices": "",
+   "expected_failure_reasons": [],
+   "expected_service_match": 1.0,
+   "expected_arg_type_ok": 1.0
+  },
+  {
+   "row_no": 5,
+   "source": "gpt41mini_cloudref_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"스피커볼륨30설정\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Speaker).speaker_setvolume(30)\"\n}",
+   "connected_devices": "",
+   "expected_failure_reasons": [],
+   "expected_service_match": 1.0,
+   "expected_arg_type_ok": 1.0
+  },
+  {
+   "row_no": 8,
+   "source": "gpt41mini_cloudref_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"온도알림\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"temp = (#TemperatureSensor).temperaturesensor_temperature\\n(#Speaker).speaker_speak(\\\"Current temperature is \\\" | temp)\"\n}",
+   "connected_devices": "",
+   "expected_failure_reasons": [],
+   "expected_service_match": 1.0,
+   "expected_arg_type_ok": 1.0
+  },
+  {
+   "row_no": 11,
+   "source": "gpt41mini_cloudref_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"야외습도알림\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"humidity = (#WeatherProvider).weatherprovider_humidityweather\\nmessage = \\\"현재 야외 습도는 \\\"\\nmessage = message + humidity\\nmessage = message + \\\"% 입니다.\\\"\\n(#Speaker).speaker_speak(message)\"\n}",
+   "connected_devices": "",
+   "expected_failure_reasons": [],
+   "expected_service_match": 1.0,
+   "expected_arg_type_ok": 1.0
+  },
+  {
+   "row_no": 14,
+   "source": "gpt41mini_cloudref_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"외부초미세먼지알림\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"pm25 = (#WeatherProvider).weatherprovider_pm25weather\\nmessage = \\\"현재 외부 초미세먼지 농도는 \\\"\\nvalueStr = pm25\\n(#Speaker).speaker_speak(message)\"\n}",
+   "connected_devices": "",
+   "expected_failure_reasons": [],
+   "expected_service_match": 1.0,
+   "expected_arg_type_ok": 1.0
+  },
+  {
+   "row_no": 17,
+   "source": "gpt41mini_cloudref_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"오늘메뉴알림\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"menu = (#MenuProvider).menuprovider_todaymenu\\n(#Speaker).speaker_speak(menu)\"\n}",
+   "connected_devices": "",
+   "expected_failure_reasons": [],
+   "expected_service_match": 1.0,
+   "expected_arg_type_ok": 1.0
+  },
+  {
+   "row_no": 20,
+   "source": "gpt41mini_cloudref_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"조명색조채도설정\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Light).light_movetohue(200)\\n(#Light).light_movetosaturation(50)\"\n}",
+   "connected_devices": "",
+   "expected_failure_reasons": [],
+   "expected_service_match": 1.0,
+   "expected_arg_type_ok": 1.0
+  },
+  {
+   "row_no": 23,
+   "source": "gpt41mini_cloudref_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"문닫기\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Door).door_close()\"\n}",
+   "connected_devices": "",
+   "expected_failure_reasons": [],
+   "expected_service_match": 1.0,
+   "expected_arg_type_ok": 1.0
+  },
+  {
+   "row_no": 26,
+   "source": "gpt41mini_cloudref_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"스피커음악재생\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Speaker).speaker_play(\\\"music.mp3\\\")\"\n}",
+   "connected_devices": "",
+   "expected_failure_reasons": [],
+   "expected_service_match": 1.0,
+   "expected_arg_type_ok": 1.0
+  },
+  {
+   "row_no": 29,
+   "source": "gpt41mini_cloudref_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"밸브열기\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Valve).valve_open()\"\n}",
+   "connected_devices": "",
+   "expected_failure_reasons": [],
+   "expected_service_match": 1.0,
+   "expected_arg_type_ok": 1.0
+  },
+  {
+   "row_no": 32,
+   "source": "gpt41mini_cloudref_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"회의실카메라사진촬영\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Camera).camera_captureimage()\"\n}",
+   "connected_devices": "{'MeetingRoom_Camera': {'category': 'Camera', 'tags': ['MeetingRoom', 'Camera']}, 'Hallway_Camera': {'category': 'Camera', 'tags': ['Hallway', 'Camera']}}",
+   "expected_failure_reasons": [],
+   "expected_service_match": 1.0,
+   "expected_arg_type_ok": 1.0
+  },
+  {
+   "row_no": 35,
+   "source": "gpt41mini_cloudref_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"거실조명색조포화도설정\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Light #livingroom).light_movetohue(240)\\n(#Light #livingroom).light_movetosaturation(80)\"\n}",
+   "connected_devices": "{'LivingRoom_Light': {'category': 'Light', 'tags': ['LivingRoom', 'Light']}, 'Kitchen_Light': {'category': 'Light', 'tags': ['Kitchen', 'Light']}}",
+   "expected_failure_reasons": [],
+   "expected_service_match": 1.0,
+   "expected_arg_type_ok": 1.0
+  },
+  {
+   "row_no": 38,
+   "source": "gpt41mini_cloudref_fullprompt_v06_ver201",
+   "candidate": "{\n  \"name\": \"Sector1에어컨온도18도설정\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#AirConditioner #Sector1).airconditioner_settargettemperature(18)\"\n}",
+   "connected_devices": "{'Sector1_AC': {'category': 'AirConditioner', 'tags': ['Sector1', 'AirConditioner']}, 'Sector2_AC': {'category': 'AirConditioner', 'tags': ['Sector2', 'AirConditioner']}}",
+   "expected_failure_reasons": [],
+   "expected_service_match": 1.0,
+   "expected_arg_type_ok": 1.0
+  },
+  {
+   "row_no": 1,
+   "source": "synthetic_edge",
+   "candidate": "{\"name\":\"\",\"cron\":\"\",\"period\":0,\"code\":\"\"}",
+   "connected_devices": "",
+   "expected_failure_reasons": [
+    "arg_type",
+    "service_match"
+   ],
+   "expected_service_match": 0.0,
+   "expected_arg_type_ok": 0.0
+  },
+  {
+   "row_no": 1,
+   "source": "synthetic_edge",
+   "candidate": "{\"name\":\"\",\"cron\":\"\",\"period\":0,\"code\":\"turn on the light\"}",
+   "connected_devices": "",
+   "expected_failure_reasons": [
+    "arg_type",
+    "no_parseable_member_access",
+    "service_match"
+   ],
+   "expected_service_match": 0.0,
+   "expected_arg_type_ok": 0.0
+  },
+  {
+   "row_no": 1,
+   "source": "synthetic_edge",
+   "candidate": "[]",
+   "connected_devices": "",
+   "expected_failure_reasons": [
+    "schema_missing_keys"
+   ],
+   "expected_service_match": 0.0,
+   "expected_arg_type_ok": 0.0
+  },
+  {
+   "row_no": 1,
+   "source": "synthetic_edge",
+   "candidate": "[1, 2]",
+   "connected_devices": "",
+   "expected_failure_reasons": [
+    "schema_missing_keys"
+   ],
+   "expected_service_match": 0.0,
+   "expected_arg_type_ok": 0.0
+  },
+  {
+   "row_no": 1,
+   "source": "synthetic_edge",
+   "candidate": "\"just a string\"",
+   "connected_devices": "",
+   "expected_failure_reasons": [
+    "schema_missing_keys"
+   ],
+   "expected_service_match": 0.0,
+   "expected_arg_type_ok": 0.0
+  },
+  {
+   "row_no": 1,
+   "source": "synthetic_edge",
+   "candidate": "not json at all",
+   "connected_devices": "",
+   "expected_failure_reasons": [
+    "invalid_json"
+   ],
+   "expected_service_match": 0.0,
+   "expected_arg_type_ok": 0.0
+  },
+  {
+   "row_no": 1,
+   "source": "synthetic_edge",
+   "candidate": "{\"name\":\"x\",\"code\":\"(#Light).switch_on()\"}",
+   "connected_devices": "",
+   "expected_failure_reasons": [
+    "schema_missing_keys"
+   ],
+   "expected_service_match": 0.0,
+   "expected_arg_type_ok": 0.0
+  },
+  {
+   "row_no": 1,
+   "source": "synthetic_edge",
+   "candidate": "{\"name\":\"\",\"cron\":\"\",\"period\":0,\"code\":\"while (true) { (#Light).switch_on() }\"}",
+   "connected_devices": "",
+   "expected_failure_reasons": [],
+   "expected_service_match": 1.0,
+   "expected_arg_type_ok": 1.0
+  },
+  {
+   "row_no": 1,
+   "source": "synthetic_edge",
+   "candidate": "{\"name\":\"\",\"cron\":\"\",\"period\":0,\"code\":\"all(all(#Kitchen #Light)).switch_off()\n(#Speaker).speaker_setvolume(\"30\")\"}",
+   "connected_devices": "",
+   "expected_failure_reasons": [
+    "invalid_json"
+   ],
+   "expected_service_match": 0.0,
+   "expected_arg_type_ok": 0.0
+  },
+  {
+   "row_no": 1,
+   "source": "synthetic_edge",
+   "candidate": "{\"name\":\"\",\"cron\":\"\",\"period\":0,\"code\":\"(#Siren).siren_playsound(\"x\")\"}",
+   "connected_devices": "",
+   "expected_failure_reasons": [
+    "invalid_json"
+   ],
+   "expected_service_match": 0.0,
+   "expected_arg_type_ok": 0.0
+  }
+ ],
+ "prompts": [
+  {
+   "row_no": 1,
+   "prompt_mode": "source",
+   "system_sha256": "f4c259cbb7f5fff0c837d45283526e84875601f71ee8a32d6f500f4a4e984358",
+   "user": "English command: Switch the dishwasher to dry mode.\nKorean command: 식기세척기를 건조 모드로 설정해줘.",
+   "system_len": 165957
+  },
+  {
+   "row_no": 1,
+   "prompt_mode": "blocks",
+   "system": "You are a deterministic JOILang generation engine. The natural-language command may be written in English or Korean. If it is Korean, translate it internally to the closest intent-preserving English meaning before reasoning. Follow the user instructions exactly and return only the requested JSON object.",
+   "user_sha256": "2cc73320719cf675c5a28ded5c2a05580d07330fb157c2afc84b9fdd42f43f94",
+   "user_len": 192710
+  },
+  {
+   "row_no": 4,
+   "prompt_mode": "source",
+   "system_sha256": "f4c259cbb7f5fff0c837d45283526e84875601f71ee8a32d6f500f4a4e984358",
+   "user": "English command: Set the siren to emergency mode.\nKorean command: 사이렌을 응급모드로 울려줘.",
+   "system_len": 165957
+  },
+  {
+   "row_no": 4,
+   "prompt_mode": "blocks",
+   "system": "You are a deterministic JOILang generation engine. The natural-language command may be written in English or Korean. If it is Korean, translate it internally to the closest intent-preserving English meaning before reasoning. Follow the user instructions exactly and return only the requested JSON object.",
+   "user_sha256": "6ed90d2a59b3803923608998efa54fb481ccc91263f75a642baf305daa845248",
+   "user_len": 192704
+  },
+  {
+   "row_no": 9,
+   "prompt_mode": "source",
+   "system_sha256": "f4c259cbb7f5fff0c837d45283526e84875601f71ee8a32d6f500f4a4e984358",
+   "user": "English command: Tell me the outdoor temperature through the speaker.\nKorean command: 외부 온도를 스피커로 출력해줘.",
+   "system_len": 165957
+  },
+  {
+   "row_no": 9,
+   "prompt_mode": "blocks",
+   "system": "You are a deterministic JOILang generation engine. The natural-language command may be written in English or Korean. If it is Korean, translate it internally to the closest intent-preserving English meaning before reasoning. Follow the user instructions exactly and return only the requested JSON object.",
+   "user_sha256": "4b677c4177b356a29a54958b3f0ccc76e449bc72313428e23a4b65bc725cd3b7",
+   "user_len": 192726
+  },
+  {
+   "row_no": 181,
+   "prompt_mode": "source",
+   "system_sha256": "f4c259cbb7f5fff0c837d45283526e84875601f71ee8a32d6f500f4a4e984358",
+   "user": "English command: Every 10 minutes, if the temperature is 30 degrees or higher, set the air conditioner to cool mode.\nKorean command: 10분마다 확인해서 온도가 30도 이상이면 에어컨을 쿨모드로 설정해줘.",
+   "system_len": 165957
+  },
+  {
+   "row_no": 181,
+   "prompt_mode": "blocks",
+   "system": "You are a deterministic JOILang generation engine. The natural-language command may be written in English or Korean. If it is Korean, translate it internally to the closest intent-preserving English meaning before reasoning. Follow the user instructions exactly and return only the requested JSON object.",
+   "user_sha256": "800e0b8b0dd3ca33498f77523d264c52af7b948aa2677ba7adbf2e166a9b3711",
+   "user_len": 192795
+  },
+  {
+   "row_no": 214,
+   "prompt_mode": "source",
+   "system_sha256": "6a2266108e8890455f7c9a4ce3172afd8c92cbbfdb28ec8bfa821518e3ef8227",
+   "user": "English command: Every 8 AM, open all blinds with odd tags, and at 9 AM, open all blinds with even tags.\nKorean command: 아침 8시에 홀수 태그가 붙은 블라인드를 모두 열어주고, 9시에는 짝수 태그가 붙은 모든 블라인드를 열어줘.",
+   "system_len": 90169
+  },
+  {
+   "row_no": 214,
+   "prompt_mode": "blocks",
+   "system": "You are a deterministic JOILang generation engine. The natural-language command may be written in English or Korean. If it is Korean, translate it internally to the closest intent-preserving English meaning before reasoning. Follow the user instructions exactly and return only the requested JSON object.",
+   "user_sha256": "43ff934a897517ade1dee149e80f2b87a13e2bda0067be589ae924ba6be253f1",
+   "user_len": 57278
+  }
+ ],
+ "service_context": [
+  {
+   "row_no": 1,
+   "sha256": "0701a7c68209ef935e850a666d0f7f788fd937f678231447a125c007b5710ae8",
+   "snippet_source": "service_schema_fallback",
+   "device_count": 50
+  },
+  {
+   "row_no": 4,
+   "sha256": "0701a7c68209ef935e850a666d0f7f788fd937f678231447a125c007b5710ae8",
+   "snippet_source": "service_schema_fallback",
+   "device_count": 50
+  },
+  {
+   "row_no": 9,
+   "sha256": "0701a7c68209ef935e850a666d0f7f788fd937f678231447a125c007b5710ae8",
+   "snippet_source": "service_schema_fallback",
+   "device_count": 50
+  },
+  {
+   "row_no": 181,
+   "sha256": "0701a7c68209ef935e850a666d0f7f788fd937f678231447a125c007b5710ae8",
+   "snippet_source": "service_schema_fallback",
+   "device_count": 50
+  },
+  {
+   "row_no": 214,
+   "sha256": "cad09489c95772a86152b2473a4f3583419e1b196f553e6a4ed724c5651a172b",
+   "snippet_source": "connected_devices_only",
+   "device_count": 3
+  }
+ ],
+ "bm25": [
+  {
+   "query": "Set the siren to emergency mode.",
+   "expected_top10": [
+    "Siren",
+    "Light",
+    "Dehumidifier",
+    "Dishwasher",
+    "Humidifier",
+    "Pump",
+    "Oven",
+    "CloudServiceProvider",
+    "AirConditioner",
+    "LaundryDryer"
+   ],
+   "expected_scores_float32": [
+    4.405118,
+    4.382268,
+    0.0,
+    1.552006,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    4.465495,
+    1.902424,
+    0.0,
+    4.59524,
+    0.0,
+    4.59524,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    4.59524,
+    0.0,
+    4.405118,
+    0.0,
+    3.808373,
+    6.093877,
+    0.0,
+    0.0,
+    0.0,
+    4.49749,
+    0.0,
+    0.0,
+    3.080752,
+    0.0,
+    4.59524,
+    0.0,
+    4.345616,
+    4.377469,
+    0.0,
+    12.062089,
+    0.0,
+    0.0,
+    1.3106,
+    0.0,
+    0.0,
+    1.699302,
+    0.0,
+    0.0,
+    0.0,
+    1.414109
+   ]
+  },
+  {
+   "query": "Turn on the light every morning at 8 AM.",
+   "expected_top10": [
+    "Switch",
+    "PresenceVitalSensor",
+    "LightSensor",
+    "Light",
+    "AirConditioner",
+    "AirPurifier",
+    "AirQualitySensor",
+    "ArmRobot",
+    "AudioRecorder",
+    "Button"
+   ],
+   "expected_scores_float32": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    2.274433,
+    4.080144,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    4.947257,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    5.717124,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "query": "If today is holiday, send an email",
+   "expected_top10": [
+    "EmailProvider",
+    "Clock",
+    "MenuProvider",
+    "ArmRobot",
+    "PresenceVitalSensor",
+    "DimmerSwitch",
+    "CloudServiceProvider",
+    "TapDialSwitch",
+    "AirConditioner",
+    "AirPurifier"
+   ],
+   "expected_scores_float32": [
+    0.0,
+    0.0,
+    0.0,
+    4.147341,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    6.806602,
+    1.856223,
+    0.0,
+    0.0,
+    0.0,
+    1.862092,
+    0.0,
+    0.0,
+    0.0,
+    9.575123,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    6.579315,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.945653,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.521368,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "query": "Every 8 AM, open all blinds with odd tags",
+   "expected_top10": [
+    "Door",
+    "Valve",
+    "WindowCovering",
+    "EmailProvider",
+    "AudioRecorder",
+    "DimmerSwitch",
+    "CloudServiceProvider",
+    "TapDialSwitch",
+    "PresenceVitalSensor",
+    "AirConditioner"
+   ],
+   "expected_scores_float32": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    2.773108,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.716987,
+    0.0,
+    0.0,
+    0.0,
+    1.722416,
+    0.0,
+    4.399634,
+    0.0,
+    3.139335,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.090372,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.407249,
+    0.0,
+    0.0,
+    4.399634,
+    0.0,
+    3.357204
+   ]
+  },
+  {
+   "query": "Tell me the outdoor temperature through the speaker.",
+   "expected_top10": [
+    "PresenceVitalSensor",
+    "TemperatureSensor",
+    "Speaker",
+    "AirConditioner",
+    "WeatherProvider",
+    "AirQualitySensor",
+    "Light",
+    "AirPurifier",
+    "ArmRobot",
+    "AudioRecorder"
+   ],
+   "expected_scores_float32": [
+    3.870703,
+    0.0,
+    2.634743,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    2.580862,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    6.161504,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    4.095517,
+    0.0,
+    0.0,
+    0.0,
+    4.341068,
+    0.0,
+    2.763527,
+    0.0
+   ]
+  }
+ ],
+ "golden": {
+  "row_no": 9,
+  "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\ntemp = (#WeatherProvider).weatherprovider_temperatureweather\\n\\n(#Speaker).speaker_speak(\\\"외부 온도는 \\\" + temp + \\\"도입니다\\\")\"}",
+  "concise_candidate": "{\"name\": \"\", \"cron\": \"\", \"period\": 0, \"script\": \"\\ntemp = (#WeatherProvider).weatherprovider_temperatureweather\\n\\n(#Speaker).speaker_speak(\\\"외부 온도는 \\\" + temp + \\\"도입니다\\\")\", \"code\": \"\\ntemp = (#WeatherProvider).weatherprovider_temperatureweather\\n\\n(#Speaker).speaker_speak(temp)\"}",
+  "expected_e": 0.9264397905759162,
+  "root_det_score": 92.644
+ }
+}

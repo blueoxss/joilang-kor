@@ -1,0 +1,17 @@
+# id: 03
+# role: postprocessor
+# params: max_tokens, micro_rules
+# description: Final JOILang output scrubber that enforces JSON shape and strips explanation drift.
+# placeholders: {command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}
+
+Finalization checklist:
+- Return a single JSON object only.
+- Keep only keys name, cron, period, code.
+- For unscheduled commands, normalize cron to "" and period to 0.
+- Do not include script, reasoning, notes, explanation, markdown, or comments.
+- Make sure quotes and newlines inside code are JSON-escaped.
+- In the final `code`, normalize receiver tags after `#` to uppercase-first title/Camel case, and lowercase every value/function member token after `).` or `all(...).`.
+- If the command describes a repeated event trigger, do not leave period at 0 unless the code already contains an equivalent repeated polling structure. Prefer period 100 with prev/curr or triggered-state logic.
+- If the command describes a simple wall-clock action with a valid cron, do not leave code empty when a direct schema-valid action exists.
+- If the command names locations or tags, prefer tag-based receivers over alias-like device ids in the final code.
+- If code would otherwise be invalid or schema-unsafe, set code to an empty string rather than inventing a workaround.

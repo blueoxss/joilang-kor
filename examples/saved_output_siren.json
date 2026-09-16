@@ -1,0 +1,11 @@
+{
+  "text": "```json\n{\n  \"name\": \"SetSirenEmergencyMode\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"(#Siren).sirenMode_setSirenMode(\\\"emergency\\\")\"\n}\n```",
+  "provenance": {
+    "kind": "stored_model_output",
+    "model": "Qwen2.5-Coder-7B-Instruct",
+    "prompt": "DirectTransfer(원 프롬프트 v0.6 계열 병합본, 서비스 목록 ver2.0.1)",
+    "run": "fullprompt_v06_ver201 (2026-07-31)",
+    "dataset_row_no": 4,
+    "note": "실험 기록에서 그대로 가져온 모델 출력. 검사 예제 입력이며 성능 수치의 근거로 쓰지 않는다."
+  }
+}

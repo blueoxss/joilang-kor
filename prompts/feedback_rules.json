@@ -1,0 +1,196 @@
+{
+ "description": "실패 유형 → 대상 블록·보강 규칙. det_feedback_rules: 원본 prompt_surgery_rules.DET_FEEDBACK_RULES 그대로(공개 피드백 예제가 사용). patch_rules: 원본 run_feedback_loop.PATCH_RULES 그대로(generator/repair 규칙 문장; 공개 코드는 읽지 않으며 원본 자료로 보존). gt_* 실패 유형은 기준 코드 비교에서만 나오므로 공개 검사기가 만들지 않는다.",
+ "source_version": "원본 개발 저장소(비공개) 구현 스냅샷 2026-04-13",
+ "det_feedback_rules": {
+  "invalid_json": {
+   "failure_type": "invalid_json",
+   "affected_block_family": "Output_Schema",
+   "prompt_block_id": "03",
+   "suggested_mutation_type": "strengthen_json_only_rule",
+   "rule": "Return exactly one JSON object only; never emit markdown, prose, comments, or code fences.",
+   "priority": 1
+  },
+  "schema_missing_keys": {
+   "failure_type": "schema_violation",
+   "affected_block_family": "Output_Schema",
+   "prompt_block_id": "03",
+   "suggested_mutation_type": "add_schema_grounding_rule",
+   "rule": "Always include exactly the required keys: name, cron, period, and code.",
+   "priority": 1
+  },
+  "schema_violation": {
+   "failure_type": "schema_violation",
+   "affected_block_family": "Service_Mapping",
+   "prompt_block_id": "02",
+   "suggested_mutation_type": "add_schema_grounding_rule",
+   "rule": "Read descriptor, return_descriptor, argument_type, and argument_bounds before choosing service names or numeric units.",
+   "priority": 1
+  },
+  "unknown_service": {
+   "failure_type": "unknown_service",
+   "affected_block_family": "Service_Mapping",
+   "prompt_block_id": "02",
+   "suggested_mutation_type": "add_canonical_service_name_rule",
+   "rule": "Use only canonical service/value names from service_list_snippet; never invent helper methods.",
+   "priority": 1
+  },
+  "service_match": {
+   "failure_type": "schema_violation",
+   "affected_block_family": "Service_Mapping",
+   "prompt_block_id": "02",
+   "suggested_mutation_type": "add_schema_grounding_rule",
+   "rule": "Do not invent service/value names; choose only functions and values present in service_list_snippet.",
+   "priority": 1
+  },
+  "gt_service_coverage": {
+   "failure_type": "schema_violation",
+   "affected_block_family": "Service_Mapping",
+   "prompt_block_id": "02",
+   "suggested_mutation_type": "add_schema_grounding_rule",
+   "rule": "Include every service family implied by the command, including both sensor reads and actuator actions.",
+   "priority": 2
+  },
+  "arg_type": {
+   "failure_type": "enum_type_mismatch",
+   "affected_block_family": "Enum_Grounding",
+   "prompt_block_id": "02",
+   "suggested_mutation_type": "strengthen_enum_type_rule",
+   "rule": "For ENUM arguments, copy an allowed enum value exactly; for numeric arguments, use unquoted numeric literals.",
+   "priority": 1
+  },
+  "enum_grounding": {
+   "failure_type": "enum_type_mismatch",
+   "affected_block_family": "Enum_Grounding",
+   "prompt_block_id": "02",
+   "suggested_mutation_type": "strengthen_enum_type_rule",
+   "rule": "For ENUM arguments, copy one allowed enum value exactly from the selected service descriptor.",
+   "priority": 1
+  },
+  "enum_type_mismatch": {
+   "failure_type": "enum_type_mismatch",
+   "affected_block_family": "Enum_Grounding",
+   "prompt_block_id": "02",
+   "suggested_mutation_type": "strengthen_enum_type_rule",
+   "rule": "For ENUM arguments, copy an allowed enum value exactly; for numeric arguments, use unquoted numeric literals.",
+   "priority": 1
+  },
+  "numeric_grounding": {
+   "failure_type": "temporal_error",
+   "affected_block_family": "Temporal_Rule",
+   "prompt_block_id": "06",
+   "suggested_mutation_type": "strengthen_temporal_rule",
+   "rule": "Convert elapsed time and units exactly according to the service descriptor before writing numeric literals.",
+   "priority": 2
+  },
+  "temporal_error": {
+   "failure_type": "temporal_error",
+   "affected_block_family": "Temporal_Rule",
+   "prompt_block_id": "06",
+   "suggested_mutation_type": "strengthen_temporal_rule",
+   "rule": "For delayed or duration-based commands, represent elapsed time with explicit state variables and comparisons.",
+   "priority": 1
+  },
+  "gt_receiver_coverage": {
+   "failure_type": "owner_device_mismatch",
+   "affected_block_family": "Owner_Device_Rule",
+   "prompt_block_id": "02",
+   "suggested_mutation_type": "strengthen_owner_device_rule",
+   "rule": "Preserve command-implied device, owner, location, and group selector tags in the receiver expression.",
+   "priority": 2
+  },
+  "owner_device_mismatch": {
+   "failure_type": "owner_device_mismatch",
+   "affected_block_family": "Owner_Device_Rule",
+   "prompt_block_id": "02",
+   "suggested_mutation_type": "strengthen_owner_device_rule",
+   "rule": "Preserve command-implied device, owner, location, and group selector tags in the receiver expression.",
+   "priority": 2
+  },
+  "dataflow": {
+   "failure_type": "dataflow_error",
+   "affected_block_family": "Dataflow",
+   "prompt_block_id": "06",
+   "suggested_mutation_type": "add_sensor_to_action_flow_rule",
+   "rule": "When reading a value for reporting or control, bind it to a variable and use that variable in the downstream action.",
+   "priority": 1
+  },
+  "dataflow_error": {
+   "failure_type": "dataflow_error",
+   "affected_block_family": "Dataflow",
+   "prompt_block_id": "06",
+   "suggested_mutation_type": "add_sensor_to_action_flow_rule",
+   "rule": "When reading a value for reporting or control, bind it to a variable and use that variable in the downstream action.",
+   "priority": 1
+  },
+  "extraneous": {
+   "failure_type": "extraneous_action",
+   "affected_block_family": "Minimality",
+   "prompt_block_id": "03",
+   "suggested_mutation_type": "strengthen_no_unrelated_action_rule",
+   "rule": "Emit only actions required by the command; remove unrelated reads, duplicate actions, and invented wrappers.",
+   "priority": 2
+  },
+  "extraneous_action": {
+   "failure_type": "extraneous_action",
+   "affected_block_family": "Minimality",
+   "prompt_block_id": "03",
+   "suggested_mutation_type": "strengthen_no_unrelated_action_rule",
+   "rule": "Emit only actions required by the command; remove unrelated reads, duplicate actions, and invented wrappers.",
+   "priority": 2
+  },
+  "semantic": {
+   "failure_type": "semantic_error",
+   "affected_block_family": "Skeleton",
+   "prompt_block_id": "06",
+   "suggested_mutation_type": "strengthen_skeleton_rule",
+   "rule": "Choose the smallest JOILang skeleton that matches the command verb, timing, target receiver, and side effect.",
+   "priority": 3
+  },
+  "gt_mismatch": {
+   "failure_type": "semantic_error",
+   "affected_block_family": "DET_Helper",
+   "prompt_block_id": "06",
+   "suggested_mutation_type": "add_targeted_repair_hint",
+   "rule": "If code is schema-valid but not target-equivalent, repair receiver coverage, service coverage, dataflow, numeric, and enum grounding.",
+   "priority": 3
+  }
+ },
+ "patch_rules": {
+  "invalid_json": {
+   "generator": "Return exactly one JSON object only. Never emit prose, markdown, or code fences.",
+   "repair": "When repairing, preserve only keys name, cron, period, code and output valid JSON only."
+  },
+  "schema_missing_keys": {
+   "generator": "Always output all required keys: name, cron, period, code.",
+   "repair": "If a key is missing, reconstruct the JSON object with the required four keys only."
+  },
+  "service_match": {
+   "generator": "Prefer canonical_name exactly whenever the schema snippet provides canonical_name. Do not emit bare raw service names when canonical_name is available. If the schema offers exact actuator actions such as Camera_CaptureImage, Speaker_Speak, Switch_Off, DoorLock_Lock, or Light_MoveToRGB, use those exact canonical actions instead of natural-language synonyms.",
+   "repair": "Replace unknown value/function tokens with the exact canonical_name from the schema snippet. Move side effects onto the correct actuator device family when the candidate called the wrong device."
+  },
+  "arg_type": {
+   "generator": "Match argument_type positionally. INTEGER and DOUBLE literals should be unquoted; ENUM literals must use allowed enum strings only.",
+   "repair": "Coerce wrong argument literals to the exact schema type and unit, while preserving intent."
+  },
+  "precondition": {
+   "generator": "Insert a power-check only when the schema snippet explicitly supports it for the same target context; otherwise do not invent one.",
+   "repair": "If diagnostics say a precondition is missing and the schema supports it, add the minimal guard before the main action."
+  },
+  "semantic": {
+   "generator": "Choose the smallest action sequence that satisfies the command verbs, nouns, numbers, tags, and timing semantics. Preserve location tags and grouped receivers such as all(#Hallway #Light), and preserve exact event wording such as repeated triggers versus one-shot waits.",
+   "repair": "Rewrite the code to match the command semantics directly, not approximately. Restore missing tags, missing grouped receivers, and missing actuator steps."
+  },
+  "extraneous": {
+   "generator": "Remove unrelated actions, duplicate actions, and helper steps that do not directly support the command.",
+   "repair": "Delete unrelated actions before attempting any other repair."
+  },
+  "gt_mismatch": {
+   "generator": "Prefer the smallest schema-valid program that directly matches the command's target operation, ordering, timing pattern, and dataset conventions. For unscheduled commands, default to cron \"\" and period 0, but for repeated event triggers use period 100 with prev/curr or triggered-state logic. Preserve delay(...), edge-trigger logic such as prev/curr threshold crossings, tag-based all(...), tag-preserving receivers, and stateful period toggles when the command implies them.",
+   "repair": "When the output is schema-valid but diverges from the expected target action sequence, rewrite it toward the canonical action ordering, timing pattern, literals, and schedule defaults. Restore missing delay(...), threshold-crossing guards, repeated-event period 100 logic, exact grouped tag receivers, time-window end guards, button-specific values, and stateful period toggles when diagnostics imply them."
+  },
+  "service_case": {
+   "generator": "Keep receiver tags after # unchanged, but lowercase every service or value member token after ). or all(...). . Resolve against canonical_name, then emit the lowercase member form in the final code.",
+   "repair": "If the candidate uses uppercase or mixed-case service/value members after the receiver dot, rewrite those member tokens to lowercase while preserving receiver tags and arguments."
+  }
+ }
+}

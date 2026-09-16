@@ -1,0 +1,16 @@
+# id: 06
+# role: helper
+# params: micro_rules
+# description: Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.
+# placeholders: {command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}
+
+The evaluator rewards these properties:
+- det_valid_json: output parses as JSON
+- det_schema_ok: keys name, cron, period, code exist
+- det_service_match: referenced values/functions exist in the schema
+- det_arg_type_ok: argument literals fit schema types and enums
+- det_precondition_ok: insert a power-check only when clearly supported and needed
+- det_semantic_ok: actions and conditions align with the command intent
+- det_min_extraneous: avoid unrelated actions or duplicate steps
+
+Optimize for the highest valid det_score by being exact, minimal, and schema-faithful.

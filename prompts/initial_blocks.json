@@ -1,0 +1,104 @@
+{
+ "description": "블록 조립 경로의 초기 블록 모음(원본 그대로). 원본 GA 구현이 후보(유전형)의 blocks 순서대로 이어 붙여 사용자 프롬프트를 만든다. 04(reranker)·05(repair)는 생성 단계가 아니라 재순위·수정 단계용 블록이다.",
+ "source_version": "원본 개발 저장소(비공개) 커밋 ebac3937 의 블록 파일 6개",
+ "default_genome": {
+  "id": "initial-blocks",
+  "blocks": [
+   "01",
+   "02",
+   "03",
+   "06"
+  ],
+  "block_params": {},
+  "note": "공개용 기본값. 원본 예제 유전형의 블록 순서만 쓰고 params/micro_rules/few_shot 은 넣지 않았다. 생성 설정은 CLI 인자로 준다."
+ },
+ "genome_schema": {
+  "blocks": "블록 ID 순서 목록",
+  "block_params": {
+   "<id>": {
+    "few_shot_count": "02 블록 예제 수(0-3)",
+    "micro_rules": "블록 끝에 붙는 규칙 문장 목록",
+    "source_file": "수정본 블록 파일 경로"
+   }
+  }
+ },
+ "blocks": [
+  {
+   "id": "01",
+   "file": "01_preamble.txt",
+   "role": "preprocessor",
+   "sha256": "f3bf7b7dfef893220ba6ed443bfcfd66d6337462aa472ae441bbe889b65fc49d",
+   "bytes": 14320
+  },
+  {
+   "id": "02",
+   "file": "02_generator_prompt.txt",
+   "role": "generator",
+   "sha256": "f9915bce9601ad97088901fc7d56188583a01b253e76ce8cc9e19317b899ea31",
+   "bytes": 27616
+  },
+  {
+   "id": "03",
+   "file": "03_postprocessor.txt",
+   "role": "postprocessor",
+   "sha256": "7e47919fe117f16679528eefc19c591494e23b4be39eef1849b316cbaa52d4b7",
+   "bytes": 1341
+  },
+  {
+   "id": "04",
+   "file": "04_reranker_prompt.txt",
+   "role": "reranker",
+   "sha256": "80143d65a59041e70c354446a1ed1d51510289d104c2a09ff20d135e6198efdd",
+   "bytes": 628
+  },
+  {
+   "id": "05",
+   "file": "05_repair_prompt.txt",
+   "role": "repair",
+   "sha256": "7841496bcfdaeca74b3db180ee17f08d75d004ac60126d2116fc0f2736107a84",
+   "bytes": 18028
+  },
+  {
+   "id": "06",
+   "file": "06_det_helper.txt",
+   "role": "helper",
+   "sha256": "b76c4359e59db6d33c0d2cc32efc834b493ae2a136889fae86f4726c930649a6",
+   "bytes": 846
+  }
+ ],
+ "original_example_genome": {
+  "id": "gen-example-version0-15",
+  "seed": 12345,
+  "blocks": [
+   "01",
+   "02",
+   "03",
+   "06"
+  ],
+  "params": {
+   "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+   "temperature": 0.0,
+   "few_shot_count": 3,
+   "max_tokens": 256,
+   "candidate_strategies": [
+    "direct",
+    "minimal",
+    "canonical_names_first"
+   ]
+  },
+  "block_params": {
+   "02": {
+    "few_shot_count": 3,
+    "micro_rules": [
+     "Prefer canonical_name exactly when available.",
+     "Use value entries in conditions and function entries in actions."
+    ]
+   },
+   "05": {
+    "repair_mode": "conservative",
+    "few_shot_count": 3
+   }
+  }
+ },
+ "original_example_genome_note": "원본 저장소의 genomes/example_genome.json 그대로. params.model 은 원본 실행 환경의 모델 ID 이며 공개 CLI 는 이 값을 읽지 않는다."
+}
